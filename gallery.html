@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/CSS/gallery.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-Jb8N5I5s9h03B0qS5Hn09Oxn7HiJFjJ/5d5lknRPv5FOq5kwf4a+UqU5Q4U2G0N3d6YK2NRhFXT8n4DDU6Z5z2w=="
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-Jb8N5I5s9h03B0qS5Hn09Oxn7HiJFjJ/5d5lknRPv5FOq5kwf4a+UqU5Q4U2G0N3d6YK2NRhFXT8n4DDU6Z5z2w=="
+        crossorigin="anonymous" />
+    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+
+    <title>CrestHive Gallery</title>
+</head>
+
+<body>
+
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js"></script>
+
+    <!-- Your main script file with type="module" -->
+    <script type="module" src="./jsfiles/gallery.js"></script>
+
+    <!-- Firebase configuration and initialization -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js';
+        import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js';
+
+        // Your Firebase configuration and initialization code can go here
+
+    </script>
+
+
+<button class="nav-toggle" id="nav-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- Your navigation menu goes here -->
+  <nav class="nav-menu">
+    <nav class="navi">
+        <div class="container nav__container">
+            <a href="index.html" class="school-name">
+                <img src="assets/logo.png"
+                    style="width: 36px; height: 36px; border-radius: 999px; margin-right: 6px;" />
+                <h4>Crest<span style="color: rgba(255, 187, 0, 1);">Hive</span></h4>
+            </a>
+            <ul class="nav__menu">
+                <li class="school-dropdown">
+                    <a href="#">School <i class="fas fa-caret-down"></i></a>
+                    <ul class="school-submenu">
+                        <li><a href="pre-basic.html"> Crest Nursery and Primary School</a></li>
+                        
+                        <li><a href="college-extra.html">Cresthive International School</a></li>
+                    </ul>
+                </li>
+                <li class="school-dropdown">
+                    <a href="#school">Admission <i class="fas fa-caret-down"></i></a>
+                    <ul class="school-submenu">
+                        <li><a href="admission-process.html">Admission process</a></li>
+                        <li><a href="entrance-test.html">Entrance tests</a></li>
+                        <li><a href="holidays.html">Holidays</a></li>
+
+                    </ul>
+                </li>
+                <li><a href="about.html">About Us</a></li>
+            </ul>
+
+
+
+            <a href="https://student.crestscholars.com/RegistrationPage">
+                <button class="navbtn">Start Registration</button>
+            </a>
+        </div>
+    </nav>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+        <nav class="navbar">
+    <div class="container nav__container">
+        <a href="index.html" class="school-name" style="display: flex; align-items: center;">
+            <img src="assets/logo.png" style="width: 36px; height: 36px; border-radius: 999px; margin-right: 6px;" />
+            <h4>Crest<span style="color: rgba(255, 187, 0, 1);">Hive</span></h4>
+        </a>
+                <ul class="nav__menu">
+                    <li class="school-dropdown">
+                        <a href="#school">School <i class="fas fa-caret-down"></i></a>
+                        <ul class="school-submenu">
+    <li><a href="pre-basic.html"> Crest Nursery and Primary School</a></li>
+                                                    <li><a href="college-extra.html">Cresthive International School</a></li>
+                        </ul>
+                    </li>
+                    <li class="school-dropdown">
+                        <a href="#school">Admission <i class="fas fa-caret-down"></i></a>
+                        <ul class="school-submenu">
+                            <li><a href="admission-process.html">Admission process</a></li>
+                            <li><a href="entrance-test.html">Entrance tests</a></li>
+                            <li><a href="holidays.html">Holidays</a></li>
+
+                        </ul>
+                    </li>                        <li><a href="about.html">About Us</a></li>
+                </ul>
+                <a href="https://student.crestscholars.com/RegistrationPage">
+                <button class="navbtn">Start Registration</button>
+                </a>
+            </div>
+        </nav>
+
+
+
+
+
+
+
+    <section class="hero">
+        <div class="hero-left">
+            <h1>Our Gallery</h1>
+            <p>We are devoted to societal evolution through <br> premium
+                quality education, high-value development, <br>
+                and interpersonal skills.</p>
+        </div>
+        <div class="hero-right">
+            <div class="heroright">
+                <div class="glassmorphism-box">
+                    <video width="100%" autoplay loop>
+                        <source src="/assets/galvideo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+            <div class="right-polygon"></div>
+        </div>
+    </section>
+
+    <nav class="category-navigation">
+        <ul>
+            <li><a href="#" data-category="all"><i class="fas fa-globe"></i>
+                    All</a></li>
+
+            <li>
+                <a href="#" data-category="activities">
+                    <i class="fas fa-running"></i> Activities
+                </a>
+
+            </li>
+            <li><a href="#" data-category="sports"><i class="fas fa-users"></i>
+                    Sports</a></li>
+            <li><a href="#" data-category="clubs">Clubs</a></li>
+            <li><a href="#" data-category="stakeholders">Stakeholders</a></li>
+        </ul>
+
+    </nav>
+
+
+
+    <section class="gallery">
+        <div class="image-grid"></div>
+
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <h2 class="footer-header">
+                <span class="fasthand-font">CrestHive</span> surpasses just
+                a
+            </h2>
+            <h2 class="footer-header footer-header-fasthand">school, we are
+                family.</h2>
+            <p class="footer-text">We imbibe knowledge without compromising</p>
+            <p class="footer-text"></p>
+            <button class="footer-button">Learn More</button>
+        </div>
+
+        <div class="footer-content2">
+            <div class="footer-content2">
+                <div class="contact-info">
+                    <h2>Contact Us</h2>
+                    <hr>
+                    <p><i class="fas fa-envelope"></i> Email:
+                        info@cresthive.com</p>
+                    <hr>
+                    <p><i class="fas fa-phone"></i> Phone number:
+                        07030175401</p>
+                </div>
+                <div class="copyright">
+                    <p>&#169; 2023, All rights reserved</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+    
+<style>
+    .scroll-snap-wrapper{
+        scroll-snap-type: y mandatory;
+
+    }
+
+    .section{
+        scroll-snap-align: start;
+    }
+</style>
+
+</body>
+
+</html>
+
+

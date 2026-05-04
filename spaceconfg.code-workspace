@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"name": "node-jsonwebtoken-master",
+			"path": "../../Downloads/node-jsonwebtoken-master"
+		},
+		{
+			"name": "cresthivelandingpage",
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.port": 5501,
+		"liveServer.settings.multiRootWorkspaceName": "cresthivelandingpage"
+	}
+}

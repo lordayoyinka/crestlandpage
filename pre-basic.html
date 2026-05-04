@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+        <link rel="stylesheet" href="CSS/input.css">
+        <link rel="stylesheet" href="CSS/prebasic.css">
+        <title>Cresthive Pre-basic</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/bodymovin@5.7.5/dist/bodymovin.min.js"></script>
+    </head>
+
+<body>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js"></script>
+
+    <!-- Your main script file with type="module" -->
+    <script type="module" src="./jsfiles/prebasic.js"></script>
+
+    <!-- Firebase configuration and initialization -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js';
+        import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js';
+
+        // Your Firebase configuration and initialization code can go here
+
+    </script>
+
+
+
+
+
+    <div class="snowfall"></div>
+
+
+
+    <div class="nav-toggle" id="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Your navigation menu goes here -->
+    <nav class="nav-menu">
+        <nav class="navi">
+            <div class="container nav__container">
+                <a href="index.html" class="school-name">
+                    <img src="assets/logo.png"
+                        style="width: 36px; height: 36px; border-radius: 999px; margin-right: 6px;" />
+                    <h4>Crest<span style="color: rgba(255, 187, 0, 1);">Hive</span></h4>
+                </a>
+                <ul class="nav__menu">
+                    <li class="school-dropdown">
+                        <a href="#school">School <i class="fas fa-caret-down"></i></a>
+                        <ul class="school-submenu">
+                            <li><a href="pre-basic.html"> Crest Nursery and Primary School</a></li>
+
+                            <li><a href="college-extra.html">Cresthive International School</a></li>
+                        </ul>
+                    </li>
+                    <li class="school-dropdown">
+                        <a href="#school">Admission <i class="fas fa-caret-down"></i></a>
+                        <ul class="school-submenu">
+                            <li><a href="admission-process.html">Admission process</a></li>
+                            <li><a href="entrance-test.html">Entrance tests</a></li>
+                            <li><a href="holidays.html">Holidays</a></li>
+
+                        </ul>
+                    </li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+
+
+
+                <a href="https://student.crestscholars.com/RegistrationPage">
+                    <button class="navbtn">Start Registration</button>
+                </a>
+            </div>
+        </nav>
+    </nav>
+
+
+
+
+    <nav class="navbar">
+        <div class="container nav__container">
+            <a href="index.html" class="school-name" style="display: flex; align-items: center;">
+                <img src="assets/logo.png"
+                    style="width: 36px; height: 36px; border-radius: 999px; margin-right: 6px;" />
+                <h4>Crest<span style="color: rgba(255, 187, 0, 1);">Hive</span></h4>
+            </a>
+            <ul class="nav__menu">
+                <li class="school-dropdown">
+                    <a href="#school">School <i class="fas fa-caret-down"></i></a>
+                    <ul class="school-submenu">
+                        <li><a href="pre-basic.html"> Crest Nursery and Primary School</a></li>
+
+                        <li><a href="college-extra.html">Cresthive International School</a></li>
+                    </ul>
+                </li>
+                <li class="school-dropdown">
+                    <a href="#school">Admission <i class="fas fa-caret-down"></i></a>
+                    <ul class="school-submenu">
+                        <li><a href="admission-process.html">Admission process</a></li>
+                        <li><a href="entrance-test.html">Entrance tests</a></li>
+                        <li><a href="holidays.html">Holidays</a></li>
+
+                    </ul>
+                </li>
+                <li><a href="about.html">About Us</a></li>
+            </ul>
+            <a href="https://student.crestscholars.com/RegistrationPage">
+                <button class="navbtn">Start Registration</button>
+            </a>
+        </div>
+    </nav>
+
+
+
+
+    <style>
+        .sections-container {
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            scroll-snap-type: y mandatory;
+            height: 100vh;
+            width: 100%;
+            scrollbar-width: 0;
+        }
+
+        #section2 {
+            background-color: #f9f9f9;
+            padding: 4rem 0;
+        }
+
+        #section2 .mx-auto {
+            max-width: 1200px;
+        }
+
+        #section2 h2 {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        #section2 img {
+            max-width: 100%;
+            min-width: 30vw;
+            min-height: 50vh;
+            object-fit: cover;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        #section2 img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        #section2 p {
+            color: #555;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1.2rem;
+            line-height: 1.5;
+            padding: 12px
+        }
+
+        #section2 h2,
+        #section2 p {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* Optional: Add a subtle background pattern */
+        #section2::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(45deg, #f9f9f9 25%, transparent 25%, transparent 75%, #f9f9f9 75%, #f9f9f9),
+                linear-gradient(-45deg, #f9f9f9 25%, transparent 25%, transparent 75%, #f9f9f9 75%, #f9f9f9);
+            background-size: 20px 20px;
+        }
+
+        /* Responsive adjustments */
+        @media screen and (max-width: 1024px) {
+
+            #section2 h2,
+            #section2 p {
+                text-align: center;
+            }
+
+            #section2 img {
+                margin-top: 1.5rem;
+            }
+        }
+
+
+
+
+
+
+        .blured {
+            width: 80vw;
+            height: auto;
+            background-color: whitesmoke;
+            border-radius: 16px;
+            background: rgb(255, 255, 255);
+            background: linear-gradient(133deg, rgba(255, 255, 255, 0.9) 0%, rgba(196, 150, 8, 0.8) 34%, rgba(255, 196, 0, 0.8) 84%, rgba(255, 255, 255, 0.9) 98%);
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+        }
+
+        .sections-container ::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Add responsive styles for mobile */
+        @media screen and (max-width: 600px) {
+            .sections-container {
+                flex-direction: column;
+            }
+
+            .blured {
+                display: flex;
+                flex-direction: column;
+                column-gap: 20px;
+                padding: 20px;
+            }
+        }
+    </style>
+
+
+
+
+
+    <!-- Hero Section -->
+    <section id="hero" class="h-screen w-screen flex items-center bg-cover bg-center relative"
+        style="background-image: url('./assets/vv1.jpg');">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div class="container mx-auto text-center relative z-10 text-white">
+            <h1 class="text-4xl lg:text-6xl font-bold mb-4">Welcome to Crest Nursery and Primary School</h1>
+            <p class="text-lg lg:text-xl mb-8">Where learning is an adventure!</p>
+
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-blue-100">
+        <div class="container mx-auto text-center lg:text-left">
+            <div class="lg:flex lg:justify-between lg:items-center">
+                <div class="lg:w-1/2 mb-8 lg:mb-0">
+                    <h2 class="text-4xl lg:text-5xl font-bold text-gray-800 mb-4">About Crest Nursery and Primary School
+                    </h2>
+                    <p id="abtpre" class="text-lg text-gray-600 mb-6 pr-12">
+                        <!-- Your content goes here -->
+                    </p>
+                    <p class="text-lg text-gray-700 mb-8">Come join us on this magical journey of education!</p>
+                    <a href="basicschool.html"
+                        class="text-blue-700 font-lg font-semibold transition duration-300 hover:underline hover:text-blue-900">More
+                        details...</a>
+                </div>
+                <div class="lg:w-1/2">
+
+                    <img src="/assets/0101.png" class="w-[80%] h-[80%]" />
+                    <!-- You can add an image or any other content here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Section 2 -->
+    <section id="section2" class="bg-gray-200 relative min-h-fit py-16">
+        <div class="mx-auto relative">
+            <h2 class="text-3xl lg:text-4xl font-bold mb-4 md:block flex flex-col text-center pb-4" id="dirTitle">School Director</h2>
+
+            <div class="mb-6 flex relative justify-center md:block lg:mb-0">
+                <img id="img"  alt="Image 1" class=" object-cover rounded-lg shadow-lg md:float-left mb-4 md:mr-6">
+            </div>
+            <div class="text-left">
+                <p id="dirText" class="px-4 text-gray-700">
+                    
+                </p>
+            </div>
+
+
+            <h2 class="text-xl font-bold mb-4 md:block flex flex-col text-right pb-4" id="dirName"></h2>
+
+        </div>
+    </section>
+
+
+
+    <!-- Categories Section -->
+    <section id="categories" class="py-16 bg-gray-100">
+        <div class="container mx-auto text-center" id="sections_container">
+            <h2 class="text-3xl lg:text-4xl font-bold mb-6">Explore Different Categories</h2>
+            <!-- Add your categories here -->
+        </div>
+    </section>
+
+
+
+    <footer class="footer">
+        <div class="footer-content">
+            <h2 class="footer-header">
+                <span class="fasthand-font">CrestHive</span> surpasses
+                just a school,
+            </h2>
+            <h2 class="footer-header footer-header-fasthand"> we
+                are family.</h2>
+            <p class="footer-text">We imbibe knowledge without
+                compromising the Deen</p>
+            <p class="footer-text"></p>
+            <a href="/about.html">
+                <button class="footer-button">Learn More</button>
+            </a>
+        </div>
+
+        <div class="footer-content2">
+            <div class="footer-content2">
+                <div class="contact-info">
+                    <h2>Contact Us</h2>
+                    <hr>
+                    <p><i class="fas fa-envelope"></i> Email:
+                        <span id="email">
+
+                        </span>
+                    </p>
+                    <hr>
+                    <p><i class="fas fa-phone"></i> Phone number:
+                        <span id="phone">
+
+                        </span>
+                    </p>
+                </div>
+                <div class="copyright">
+                    <p>&#169; 2023, All rights reserved</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <script src="scripts.js"></script>
+</body>
+
+
+
+
+</html>

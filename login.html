@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f0f4f8;
+    }
+
+    #login-container {
+      max-width: 28rem;
+      width: 100%;
+      padding: 2rem;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      margin-top: 1rem;
+      margin-bottom: .5rem;
+    }
+
+    .form-group label {
+      position: relative;
+      background-color: #ffffff;
+      padding: 0 0.5rem;
+      color: #7f8c8d;
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+      margin-bottom: .5rem;
+    }
+
+    .form-group input {
+      width: 90%;
+      height: auto;
+      padding: 1rem;
+      border: 1px solid #bdc3c7;
+      border-radius: 4px;
+      outline: none;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus {
+      border-color: #3498db;
+    }
+
+    .form-group input:not(:placeholder-shown)+label {
+      font-size: 0.8rem;
+      transform: translateY(-100%) scale(0.8);
+    }
+
+    select {
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid #bdc3c7;
+      border-radius: 4px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    select:focus {
+      border-color: #3498db;
+    }
+
+    .flex-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+
+    .flex-container .checkbox {
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+      color: #7f8c8d;
+    }
+
+    .flex-container a {
+      text-decoration: none;
+      color: #3498db;
+      transition: color 0.3s ease;
+    }
+
+    .flex-container a:hover {
+      color: #2980b9;
+    }
+
+    .submit-button {
+      width: 100%;
+      padding: 1rem;
+      border: none;
+      text-align: center;
+      border-radius: 20px;
+      background-color: rgb(21 128 61);
+      color: #ffffff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-button:hover {
+      background-color: #35b929;
+    }
+
+
+
+    /* Add styles for the loading overlay */
+    .loading-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .loading-spinner {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #3498db;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Include Firebase SDK (replace 'your-firebase-config' with your actual Firebase config) -->
+
+
+
+
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js"></script>
+
+  <!-- Your main script file with type="module" -->
+  <script type="module" src="./jsfiles/login.mjs"></script>
+
+  <!-- Firebase configuration and initialization -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js';
+    import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js';
+
+    // Your Firebase configuration and initialization code can go here
+
+  </script>
+
+
+
+
+
+  <div id="login-container">
+    <h2>Sign in to your account</h2>
+    <form id="signin">
+      <div class="form-group">
+        <label for="email-address">Email address</label>
+        <input id="email-address" name="email" type="email" autoComplete="email" required placeholder="Email address"
+          value="" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autoComplete="current-password" required
+          placeholder="Password" />
+      </div>
+      <div class="form-group">
+        <label for="year">Year</label>
+        <select name="year" id="year" required>
+          <option value="">Please Select</option>
+          <option value="2023">2023</option>
+          <option value="2022">2022</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="term">Term</label>
+        <select name="term" id="term" required>
+          <option value="">Please Select</option>
+          <option value="1st">1st</option>
+          <option value="2nd">2nd</option>
+          <option value="3rd">3rd</option>
+        </select>
+      </div>
+      <div class="flex-container">
+        <div class="checkbox">
+          <!-- You can add a "Remember me" checkbox here -->
+        </div>
+
+      </div>
+      <button id="submit" class="submit-button">Sign in
+      </button>
+    </form>
+  </div>
+
+
+
+
+
+
+
+
+  <!-- Add the loading overlay markup -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+  </div>
+
+</body>
+
+</html>

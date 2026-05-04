@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <title>CrestHive About</title>
+    <link rel="stylesheet" href="/CSS/input.css">
+    <link rel="stylesheet" href="/CSS/about.css">
+</head>
+
+<body>
+
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js"></script>
+
+    <!-- Your main script file with type="module" -->
+    <script type="module" src="./jsfiles/about.js"></script>
+
+    <!-- Firebase configuration and initialization -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js';
+        import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js';
+
+        // Your Firebase configuration and initialization code can go here
+
+    </script>
+
+
+    <style>
+      
+        .sections-container {
+            display: flex;
+            overflow: hidden;
+            min-height: 90vh;
+            color: white;
+            /* Adjust based on the number of sections */
+            /* Adjust the duration as needed */
+        }
+
+
+
+        .section2 {
+        
+            min-width: 100vw;
+            min-height: 100%;
+            display: flex;
+        }
+
+        .s2left,
+        .s2right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .s2left img {
+            max-width: 60%;
+            height: 75vh;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+
+        .blured {
+            width: 80vw;
+            height: auto;
+            background-color: whitesmoke;
+            border-radius: 16px;
+            background: rgb(255, 255, 255);
+            background: linear-gradient(133deg, rgba(255, 255, 255, 0.9) 0%, rgba(196, 150, 8, 0.8) 34%, rgba(255, 196, 0, 0.8) 84%, rgba(255, 255, 255, 0.9) 98%);
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+        }
+
+        .sections-container ::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Add responsive styles for mobile */
+        @media screen and (max-width: 600px) {
+
+            .sections-container {
+                width: 100%;
+                animation: none;
+                scroll-snap-type: x mandatory;
+                overflow-y: hidden;
+                overflow-x: scroll;
+                color: white;
+            }
+
+            .section2 {
+                flex: 0 0 100%;
+                scroll-snap-align: start;
+            }
+
+            .s2left img {
+                max-width: 100%;
+                min-width: 50%;
+                height: auto;
+                object-fit: cover;
+            }
+
+            .blured {
+                display: flex;
+                flex-direction: column;
+                column-gap: 40px;
+                padding: 20px;
+            }
+
+            .blured p {}
+        }
+    </style>
+
+
+
+
+        </script>
+
+
+
+
+    <div class="nav-toggle" id="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Your navigation menu goes here -->
+    <nav class="nav-menu">
+        <nav class="navi">
+            <div class="container nav__container">
+                <a href="index.html" class="school-name">
+                    <img src="assets/logo.png"
+                        style="width: 36px; height: 36px; border-radius: 999px; margin-right: 6px;" />
+                    <h4>Crest<span style="color: rgba(255, 187, 0, 1);">Hive</span></h4>
+                </a>
+                <ul class="nav__menu">
+                    <li class="school-dropdown">
+                        <a href="#school">School <i class="fas fa-caret-down"></i></a>
+                        <ul class="school-submenu">
+                            <li><a href="pre-basic.html"> Crest Nursery and Primary School</a></li>
+                        </ul>
+                    </li>
+                    <li class="school-dropdown">
+                        <a href="#school">Admission <i class="fas fa-caret-down"></i></a>
+                        <ul class="school-submenu">
+                            <li><a href="admission-process.html">Admission process</a></li>
+                            <li><a href="entrance-test.html">Entrance tests</a></li>
+                            <li><a href="holidays.html">Holidays</a></li>
+
+                        </ul>
+                    </li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+
+                <a href="/login.html">
+                    <button class="navbtn2">Log In</button>
+                </a>
+
+                <a href="https://student.crestscholars.com/RegistrationPage">
+                    <button class="navbtn">Start Registration</button>
+                </a>
+            </div>
+        </nav>
+    </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+    <nav class="navbar">
+        <div class="container nav__container">
+            <a href="index.html" class="school-name" style="display: flex; align-items: center;">
+                <img src="assets/logo.png"
+                    style="width: 36px; height: 36px; border-radius: 999px; margin-right: 6px;" />
+                <h4>Crest<span style="color: rgba(255, 187, 0, 1);">Hive</span></h4>
+            </a>
+            <ul class="nav__menu">
+                <li class="school-dropdown">
+                    <a href="#school">School <i class="fas fa-caret-down"></i></a>
+                    <ul class="school-submenu">
+                        <li><a href="pre-basic.html"> Crest Nursery and Primary School</a></li>
+                        <li><a href="college-extra.html">Cresthive International School</a></li>
+                    </ul>
+                </li>
+                <li class="school-dropdown">
+                    <a href="#school">Admission <i class="fas fa-caret-down"></i></a>
+                    <ul class="school-submenu">
+                        <li><a href="admission-process.html">Admission process</a></li>
+                        <li><a href="entrance-test.html">Entrance tests</a></li>
+                        <li><a href="holidays.html">Holidays</a></li>
+
+                    </ul>
+                </li>
+                <li><a href="about.html">About Us</a></li>
+            </ul>
+            <a href="https://student.crestscholars.com/RegistrationPage">
+                <button class="navbtn">Start Registration</button>
+            </a>
+        </div>
+    </nav>
+
+    <section class="hero" style="width: 100vw; height: 90vh;">
+        <div class="heroleft">
+            <h1 id="aboutTitle">
+
+            </h1>
+            <p id="aboutSubtitle">
+
+            </p>
+        </div>
+
+        <div class="heroright">
+            <img src="/assets/Group 21339.png">
+        </div>
+        <div class="right-polygon"></div>
+    </section>
+
+    
+
+    <div id="sections-container" class="sections-container text-white">
+
+        <section class="section2"
+        style="background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.7)), url('/assets/Rectangle 5.jpg'); background-size: cover; background-position: center;">
+        <div class="s2left">
+            <img id="img3" src="/assets/dir.png" alt="Image 3" class="w-screen h-screen object-cover">
+        </div>
+        <div class="s2right">
+            <div class="overlay-text">
+                <div class="overlay-text text-white">
+                    <h2 id="" class="text-white text-3xl font-bold mb-2">Director
+                    <h2 id="dirName3" class="text-white text-xl font-bold mb-2"></h2>
+                </div>
+            </div>
+    </section>
+
+        <section class="section2"
+            style="background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.7)), url('/assets/Rectangle 5.jpg'); background-size: cover; background-position: center;">
+            <div class="s2left">
+                <img id="img2" src="/assets/logo.png" alt="Image 2" class="w-screen h-screen object-cover">
+            </div>
+            <div class="s2right">
+                <div class="overlay-text text-white">
+                    <h2 id="" class="text-white text-3xl font-bold mb-2">School Director</h2>
+                    <h2 id="dirName2" class="text-white text-xl font-bold mb-2"></h2>
+                </div>
+            </div>
+        </section>
+
+        <section id="bgimg1" class="section2 w-screen"
+            style="background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.7)), url('/assets/Rectangle 5.jpg'); background-size: cover; background-position: center;">
+            <div class="s2left">
+                <img id="img1" src="/assets/logo.png" alt="Image 1" 
+                    class="h-screen object-cover">
+            </div>
+            <div class="s2right">
+                <div class="overlay-text text-white">
+                    <h2 id="" class="text-white text-3xl font-bold mb-2">College Director
+                    </h2>
+                    <h2 id="dirName1" class="text-white text-xl font-bold mb-2"></h2>
+                </div>
+            </div>
+        </section>
+
+
+       
+    </div>
+
+
+
+
+
+    <section class="section3">
+
+        <div class="s3container">
+            <div class="blured">
+
+
+                <div
+                    style="background-color: white; border-radius: 16px; font-size: large; height: auto; padding: 10px 60px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: 600; flex: 1 1 0%;">
+
+                    <p
+                        style=" display: flex; flex-direction: column; text-align: left; padding-bottom: 20px; font-weight: 900; font-family: Arial, Helvetica, sans-serif; ">
+                        <img src="assets/target.png"
+                            style="background-color: aliceblue; width: 50px; height: 50px; border-radius: 9999px; object-fit: contain; margin-bottom: 10px;" />
+                        Mission
+                    </p>
+
+                    <p style="max-width: 100%;
+                    height: auto;
+                    word-wrap: break-word;" id="missionText" class="text-xl">
+
+
+                    </p>
+
+                </div>
+
+                <div
+                    style="background-color: white; border-radius: 16px; font-size: large; height: auto; padding: 10px 60px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: 600; flex: 1 1 0%; height: auto;">
+
+                    <p
+                        style=" display: flex; flex-direction: column; text-align: left; padding-bottom: 20px; font-weight: 900; font-family: Arial, Helvetica, sans-serif; ">
+                        <img src="assets/aim.png"
+                            style="background-color: aliceblue; width: 50px; height: 50px; border-radius: 9999px; object-fit: contain; margin-bottom: 10px;" />
+                        Vision
+                    </p>
+
+                    <p style=" max-width: 100%;
+                    height: auto;
+                    word-wrap: break-word; padding-bottom: 20px;" id="visionText" class="text-xl">
+
+                    </p>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="section7">
+        <h2>Meet Our Staff</h2>
+        <div class="staff-cards-container">
+
+        </div>
+    </section>
+
+    <!----------------- footer ----------------->
+
+    <footer class="footer">
+        <div class="footer-content">
+            <h2 class="footer-header">
+                <span class="fasthand-font">CrestHive</span> surpasses just
+                a
+            </h2>
+            <h2 class="footer-header footer-header-fasthand">school, we are
+                family.</h2>
+            <p class="footer-text">We imbibe knowledge without compromising</p>
+            <p class="footer-text"></p>
+            <a href="/about.html">
+                <button class="footer-button">Learn More</button>
+            </a>
+        </div>
+
+        <div class="footer-content2">
+            <div class="footer-content2">
+                <div class="contact-info">
+                    <h2>Contact Us</h2>
+                    <hr>
+                    <p><i class="fas fa-envelope"></i> Email:
+                        <span id="email">
+
+                        </span>
+                    </p>
+                    <hr>
+                    <p><i class="fas fa-phone"></i> Phone number:
+                        <span id="phone">
+
+                        </span>
+                    </p>
+                </div>
+                <div class="copyright">
+                    <p>&#169; 2023, All rights reserved</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const container = document.querySelector('.staff-cards-container');
+
+            const scrollAmount = 1;
+            const scrollSpeed = 2;
+
+
+            
+            function autoScroll() {
+                container.scrollLeft += scrollAmount * scrollSpeed;
+                if (container.scrollLeft >= container.scrollWidth - container.clientWidth) {
+                    container.scrollLeft = 0;
+                }
+                requestAnimationFrame(autoScroll);
+            }
+
+           
+
+            // Start auto-scrolling when the page loads
+            autoScroll();
+            autoScroll2();
+        });
+
+
+
+
+
+
+        // JavaScript to handle card scrolling
+        document.addEventListener("DOMContentLoaded", function () {
+            const nextButton = document.getElementById("nextButton");
+            const prevButton = document.getElementById("prevButton");
+            const cardContainer = document.querySelector(".card-container");
+
+            // Define the scroll width to move cards
+            const scrollWidth = 450;
+
+            // Function to scroll cards to the left
+            function scrollCardsLeft() {
+                cardContainer.scrollLeft -= scrollWidth;
+            }
+
+            // Function to scroll cards to the right
+            function scrollCardsRight() {
+                cardContainer.scrollLeft += scrollWidth;
+            }
+
+            // Attach click event listeners to the next and previous buttons
+            nextButton.addEventListener("click", scrollCardsRight);
+            prevButton.addEventListener("click", scrollCardsLeft);
+        });
+
+
+
+    </script>
+</body>
+
+</html>

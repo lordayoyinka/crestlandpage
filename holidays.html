@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="CSS/input.css">
+    <link rel="stylesheet" href="CSS/prebasic.css">
+
+    <title>Admission Process</title>
+</head>
+
+<body>
+
+
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js"></script>
+
+    <!-- Your main script file with type="module" -->
+    <script type="module" src="./jsfiles/holidays.js"></script>
+
+    <!-- Firebase configuration and initialization -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js';
+        import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js';
+        // Your Firebase configuration and initialization code can go here
+
+    </script>
+
+
+
+
+    <button class="nav-toggle" id="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    
+      <!-- Your navigation menu goes here -->
+      <nav class="nav-menu">
+        <nav class="navi">
+            <div class="container nav__container">
+                <a href="index.html" class="school-name">
+                    <img src="assets/logo.png"
+                        style="width: 36px; height: 36px; border-radius: 999px; margin-right: 6px;" />
+                    <h4>Crest<span style="color: rgba(255, 187, 0, 1);">Hive</span></h4>
+                </a>
+                <ul class="nav__menu">
+                    <li class="school-dropdown">
+                        <a href="#">School <i class="fas fa-caret-down"></i></a>
+                        <ul class="school-submenu">
+                            <li><a href="pre-basic.html"> Crest Nursery and Primary School</a></li>
+                            
+                            <li><a href="college-extra.html">Cresthive International School</a></li>
+                        </ul>
+                    </li>
+                    <li class="school-dropdown">
+                        <a href="#school">Admission <i class="fas fa-caret-down"></i></a>
+                        <ul class="school-submenu">
+                            <li><a href="admission-process.html">Admission process</a></li>
+                            <li><a href="entrance-test.html">Entrance tests</a></li>
+                            <li><a href="holidays.html">Holidays</a></li>
+
+                        </ul>
+                    </li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+
+
+
+                <a href="https://student.crestscholars.com/RegistrationPage">
+                    <button class="navbtn">Start Registration</button>
+                </a>
+            </div>
+        </nav>
+    </nav>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+            <nav class="navbar">
+        <div class="container nav__container">
+            <a href="index.html" class="school-name" style="display: flex; align-items: center;">
+                <img src="assets/logo.png" style="width: 36px; height: 36px; border-radius: 999px; margin-right: 6px;" />
+                <h4>Crest<span style="color: rgba(255, 187, 0, 1);">Hive</span></h4>
+            </a>
+                    <ul class="nav__menu">
+                        <li class="school-dropdown">
+                            <a href="#school">School <i class="fas fa-caret-down"></i></a>
+                            <ul class="school-submenu">
+        <li><a href="pre-basic.html"> Crest Nursery and Primary School</a></li>
+                                                        <li><a href="college-extra.html">Cresthive International School</a></li>
+                            </ul>
+                        </li>
+                        <li class="school-dropdown">
+                            <a href="#school">Admission <i class="fas fa-caret-down"></i></a>
+                            <ul class="school-submenu">
+                                <li><a href="admission-process.html">Admission process</a></li>
+                                <li><a href="entrance-test.html">Entrance tests</a></li>
+                                <li><a href="holidays.html">Holidays</a></li>
+
+                            </ul>
+                        </li>                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                    <a href="https://student.crestscholars.com/RegistrationPage">
+                    <button class="navbtn">Start Registration</button>
+                    </a>
+                </div>
+            </nav>
+
+
+
+
+
+
+
+
+
+
+    <header class="bg-green-800 text-white p-1 h-2">       
+    </header>
+
+    <div class="relative overflow-hidden">
+        <img src="assets/06.jpg" alt="Background Image" class="w-screen h-96 object-cover">
+    </div>
+
+    <section class="admission-process p-8">
+        <h2 class="text-3xl font-bold text-green-800 mb-4 line-clamp-1" id="hldTitle">Our Holiday System</h2>
+        <p class="text-gray-700" id="hldText">   
+
+        </p>
+        <!-- Add more content as needed -->
+    </section>
+
+    <section class="requirements p-8 mb-20">
+        <h2 class="text-2xl font-bold text-green-800 mb-4">Holidays list:</h2>
+        <ul id="hld_ul" class="list-disc list-inside">
+         
+        </ul>
+    </section>
+
+
+
+
+
+
+    
+   
+    <footer class="footer">
+        <div class="footer-content">
+            <h2 class="footer-header">
+                <span class="fasthand-font">CrestHive</span> surpasses
+                just a school,
+            </h2>
+            <h2 class="footer-header footer-header-fasthand"> we
+                are family.</h2>
+            <p class="footer-text">We imbibe knowledge without
+                compromising the Deen</p>
+            <p class="footer-text"></p>
+            <a href="/about.html">
+            <button class="footer-button">Learn More</button>
+            </a>
+        </div>
+
+        <div class="footer-content2">
+            <div class="footer-content2">
+                <div class="contact-info">
+                    <h2>Contact Us</h2>
+                    <hr >
+                    <p><i class="fas fa-envelope"></i> Email:
+                       <span id="email">
+
+                       </span>
+                    </p>
+                    <hr>
+                   <p><i class="fas fa-phone"></i> Phone number:
+                        <span id="phone">
+
+                        </span>
+                    </p>
+                </div>
+                <div class="copyright">
+                    <p>&#169; 2023, All rights reserved</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+
+
+
+
+
+    <script src="jsfiles/admission-process.js" ></script>
+
+</body>
+
+</html>

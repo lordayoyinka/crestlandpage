@@ -1,0 +1,316 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    line-height: 1.7;
+    background: #fff;
+    text-decoration: none;
+    overflow-x: hidden;
+    position: absolute;
+}
+
+
+
+li {
+    list-style: none;
+}
+
+a {
+    list-style: none;
+    text-decoration: none;
+    color: #000;
+    transition: color 0.3s;
+}
+
+
+.navbar {
+    background: rgba(241, 238, 255, 1);
+    width: 98vw;
+    height: 100px;
+    position: fixed;
+    margin-bottom: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.5);
+    /* Semi-transparent white background */
+    backdrop-filter: blur(15px);
+    /* Apply a blur effect */
+    /* Add border-radius for rounded corners */
+    box-shadow: 0 0 10px rgba(102, 145, 255, 0.37);
+    /* Add drop shadow */
+    transition: background-color 0.3s;
+}
+
+.nav__container {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.school-name {
+    font-family: 'Lexend', sans-serif;
+    font-size: 29px;
+    color: rgba(81, 132, 15, 1);
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+.nav__menu {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+.nav__menu a {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #000;
+}
+
+.nav__menu a:hover {
+    color: #ff9900;
+}
+
+.navbtn {
+    background-color: rgba(97, 167, 6, 1);
+    color: #fff;
+    padding: 13.26px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    height: 44.52px;
+    width: 169.74px;
+}
+
+.navbtn:hover {
+    background-color: #ff9900;
+}
+
+/* Style the dropdown */
+.school-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Style the dropdown icon */
+.school-dropdown i {
+    margin-left: 5px;
+}
+
+/* Hide the submenu by default */
+.school-submenu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    border-radius: 20px;
+    width: 200px; /* Adjust the width as needed */
+
+}
+
+/* Style the submenu items */
+.school-submenu li {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+
+.school-submenu li:nth-child(2) {
+    border-bottom: none;
+}
+
+/* Show the submenu on hover */
+.school-dropdown:hover .school-submenu {
+    display: block;
+}
+
+
+
+.header-text {
+    margin-top: 100px;
+}
+.header-text h1 {
+    /* font-size: 28px; */
+    margin-left: 65px;
+
+    color: #000;
+    font-family: 'Poppins', sans-serif;
+    font-size: 34.287px;
+font-style: normal;
+font-weight: 600;
+line-height: 44.287px; /* 100% */
+letter-spacing: 0.923px;
+}
+
+.highlight {
+    color: #ff9900; /* Highlight color for "Blog" */
+}
+
+.filsearch {
+    display: flex;
+    justify-content: flex-start;
+    /* justify-content: space-between; */
+    padding: 65px;
+    margin-bottom: -90px;
+}
+
+.filter-bar {
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    right: 0;
+}
+
+
+/* Style the filter bar */
+/* .filter-bar {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+} */
+
+.filter-btn {
+    background: #f0f0f0;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    /* transition: background 0.3s; */
+}
+
+.filter-btn.active {
+    background: #ff9900;
+    color: white;
+}
+
+.filter-btn:hover {
+    background: #ddd;
+}
+
+/* 
+.search-bar {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0; */
+    /* margin: 20px;
+    right: 65px;
+  } */
+  
+  .search-icon {
+    margin-right: 10px; /* Adjust the margin as needed */
+    fill: #000; /* Set the icon color */
+  }
+  
+  .search-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    width: 220px; /* Adjust the width as needed */
+  }
+  
+  /* Add any additional styles you need for the search bar and input */
+  
+
+
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    width: 30%; /* Adjust card width as needed */
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    transition: transform 0.2s;
+    display: none;
+}
+
+/* .card {
+    display: none;
+  } */
+  
+  .card:nth-child(-n+9) {
+    display: block;
+  }
+  
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card-info {
+    padding: 20px;
+}
+
+.date {
+    color: #777;
+    font-size: 14px;
+    margin: 0;
+}
+
+h2 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.read-more {
+    color: #ff9900;
+    text-decoration: underline;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
+/* ... your existing CSS ... */
+
+.title-container {
+    width: 60%; /* Set your desired width for the title container */
+}
+
+.title {
+    font-size: 18px;
+    margin: 10px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Set the number of lines before ellipsis */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    color: #121212;
+font-style: normal;
+font-weight: 600;
+line-height: 31.37px; /* 141.667% */
+letter-spacing: 0.277px;
+}

@@ -1,0 +1,728 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    background-color: #f5f5f5;
+    position: relative;
+}
+
+.snowfall {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    pointer-events: none;
+    z-index: 2000;
+}
+
+.snowflake {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: 5s snowfall linear infinite;
+}
+
+@keyframes snowfall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
+
+
+
+
+
+
+
+.gradient-background {
+
+    height: 100%;
+    z-index: -1;
+    /* Place the gradient behind other elements */
+    animation: switchGradient 10s linear infinite;
+    /* Adjust the duration as needed */
+    background: linear-gradient(to right, #025029, #1aa560);
+    background-size: 200% 100%;
+    /* Twice the width for smooth transitioning */
+}
+
+@keyframes switchGradient {
+
+    0%,
+    100% {
+        background-position: 100% 0;
+    }
+
+    50% {
+        background-position: 0 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+nav li {
+    list-style: none;
+}
+
+.requirements{
+    list-style: disc;
+}
+
+a {
+    list-style: none;
+    text-decoration: none;
+    color: #000;
+    transition: color 0.3s;
+}
+
+
+
+
+.navbar {
+    background: rgba(241, 238, 255, 1);
+    width: 100vw;
+    min-width: 98vw;
+    height: 100px;
+    position: fixed;
+    padding-right: 20px;
+    padding-left: 20px;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.5);
+    /* Semi-transparent white background */
+    backdrop-filter: blur(15px);
+    /* Apply a blur effect */
+    /* Add border-radius for rounded corners */
+    box-shadow: 0 0 10px rgba(102, 145, 255, 0.37);
+    /* Add drop shadow */
+    transition: background-color 0.3s;
+}
+
+.nav__container {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.school-name {
+    font-family: 'Lexend', sans-serif;
+    font-size: 29px;
+    color: rgba(81, 132, 15, 1);
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+.nav__menu {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+
+.nav-toggle {
+    visibility: hidden;
+}
+
+.nav-menu {
+    visibility: hidden;
+}
+
+.nav__menu a {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #000;
+}
+
+.nav__menu a:hover {
+    color: #ff9900;
+}
+
+.navbtn {
+    background-color: rgba(97, 167, 6, 1);
+    color: #fff;
+    padding: 13.26px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    height: 44.52px;
+    margin-right: 20px;
+    width: 169.74px;
+}
+
+.navbtn:hover {
+    background-color: #ff9900;
+}
+
+.nav-toggle {
+    visibility: hidden;
+}
+
+.nav-menu {
+    visibility: hidden;
+}
+
+/* Style the dropdown */
+.school-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Style the dropdown icon */
+.school-dropdown i {
+    margin-left: 5px;
+}
+
+/* Hide the submenu by default */
+.school-submenu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    border-radius: 20px;
+    width: 200px;
+    /* Adjust the width as needed */
+
+}
+
+/* Style the submenu items */
+.school-submenu li {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 3px solid #ccc;
+}
+
+.school-submenu li:nth-child(2) {
+    border-bottom: none;
+}
+
+/* Show the submenu on hover */
+.school-dropdown:hover .school-submenu {
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+header {
+    background-color: #2bbe75;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    padding: 20px;
+    color: white;
+}
+
+
+header p {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    animation: 4s zoomsin infinite;
+
+}
+
+@keyframes zoomsin {
+
+    0% {
+        transform: scale(1);
+    }
+
+
+    50% {
+        transform: scalex(2);
+    }
+
+    100% {
+        transform: scalex(1);
+    }
+
+}
+
+
+
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    padding-top: 40px;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    max-width: 70px;
+    border-radius: 100%;
+    padding: 6px;
+    background: white;
+    margin-right: 10px;
+}
+
+.about,
+.categories,
+.gallery,
+.activities,
+.contact {
+    padding: 40px;
+    margin: 20px 0;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.categories h3,
+.gallery h2,
+.activities h2,
+.contact h2 {
+    color: #046836;
+}
+
+.categories {
+    text-align: center;
+}
+
+.category {
+    margin-bottom: 30px;
+}
+
+.category h3 {
+    color: #ff6699;
+}
+
+
+.image-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns in the grid */
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #000;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  
+  
+  
+  /* Add expanded class effect */
+
+
+.activities {
+    text-align: center;
+}
+
+
+
+.footer {
+    width: 100vw;
+    height: auto;
+    background: none;
+    background-image: url('/assets/Rectangle\ 41.png');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+}
+
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-header {
+    font-size: 48px;
+    margin-top: 100px;
+    margin-bottom: 5px;
+    font-weight: normal;
+}
+
+.fasthand-font {
+    font-family: 'Fasthand', cursive;
+}
+
+.footer-header-fasthand {
+    font-family: 'Roboto Slab', serif;
+    font-size: 35px;
+    font-weight: 200;
+    margin-top: -18px;
+}
+
+.footer-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    margin-top: -28px;
+    margin: 5px 0;
+}
+
+.footer-button {
+    background-color: #ff9900;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.footer-button:hover {
+    background-color: #e58300;
+}
+
+.footer-content2 {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    /* Distribute items to both ends */
+    align-items: center;
+    padding: 20px;
+    color: #fff;
+    /* Text color */
+    margin-top: 20px;
+    /* Add margin to the top */
+}
+
+.footer-content2 h2 {
+    margin-bottom: 10px;
+    /* Add margin to the bottom of the header */
+}
+
+
+.footer-content2 p {
+    margin-bottom: 10px;
+    /* Add margin to the bottom of paragraphs */
+}
+
+.footer-content2 button {
+    margin-top: 10px;
+    /* Add margin to the top of the button */
+}
+
+
+.contact-info {
+    flex: 1;
+    padding-right: 20px;
+    text-align: left;
+    /* Adjust text alignment */
+}
+
+.contact-info h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.line {
+    border-top: 1px solid #fff;
+    margin: 10px 0;
+}
+
+.contact-info p {
+    margin: 10px 0;
+}
+
+.copyright {
+    flex: 1;
+    text-align: right;
+}
+
+.copyright p {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.social-icons a {
+    color: #fff;
+    /* Icon color */
+    text-decoration: none;
+    margin-left: 10px;
+    /* Adjust spacing between icons */
+    font-size: 20px;
+}
+
+/* Style for the email icon */
+.contact-info p:nth-child(odd) i {
+    font-size: 20px;
+    /* Adjust the icon size as needed */
+    margin-right: 10px;
+    /* Add spacing between the icon and text */
+    color: #fff;
+    /* Change the icon color */
+}
+
+/* Style for the phone icon */
+.contact-info p:nth-child(even) i {
+    font-size: 20px;
+    /* Adjust the icon size as needed */
+    margin-right: 10px;
+    /* Add spacing between the icon and text */
+    color: #fff;
+    /* Change the icon color */
+}
+
+.your-button-class {
+    width: 300px;
+    height: 93px;
+    border-radius: 20px;
+    font-size: 26px;
+    font-weight: bold;
+    margin-top: 50px;
+    flex-shrink: 0;
+}
+
+
+
+/* Add more styles and animations as needed */
+@media (max-width: 768px) {
+
+    /* Header styles for smaller screens */
+    header {
+        padding: 10px;
+    }
+
+    header p {
+        font-size: 16px;
+    }
+
+    /* Logo styles for smaller screens */
+    .logo {
+        padding-top: 20px;
+    }
+
+    .logo img {
+        max-width: 50px;
+    }
+
+    /* Image styles for smaller screens */
+    .image-container img {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Footer styles for smaller screens */
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 600px) {
+
+    .nav-toggle {
+        visibility: visible;
+    }
+
+    .nav-menu {
+        visibility: visible;
+    }
+
+
+
+    .navbar {
+        visibility: hidden;
+    }
+
+    .nav-toggle {
+        cursor: pointer;
+        background: none;
+        position: fixed;
+        border: none;
+        padding: 15px;
+        display: flex;
+        z-index: 200;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #33333388;
+        color: #fff;
+    }
+
+    .nav-toggle span {
+        width: 25px;
+        height: 3px;
+        background-color: #fff;
+        margin: 5px 0;
+        transition: 0.4s;
+    }
+
+
+    header p{
+        animation: 4s zoomsin infinite;
+
+}
+
+@keyframes zoomsin {
+
+    0% {
+        transform: scale(.8);
+    }
+
+
+    50% {
+        transform: scalex(1.2);
+    }
+
+    100% {
+        transform: scalex(.8);
+    }
+
+}
+
+
+
+.image-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* 4 columns in the grid */
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #000;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  
+  
+  /* Add hover effect using the provided keyframes */
+
+ 
+.activities {
+    text-align: center;
+}
+
+
+    .nav-menu {
+        display: none;
+        text-align: center;
+        position: fixed;
+        width: 100vw;
+        z-index: 100;
+
+
+    }
+
+    .navi {
+        background-color: rgba(255, 255, 255, 0.9);
+        z-index: 1000;
+        top: 60px;
+        left: 0;
+        padding: 20px;
+    }
+
+    .nav-menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-menu li {
+        margin: 10px 0;
+    }
+
+    .nav-menu a {
+        text-decoration: none;
+        color: #333;
+        font-size: 18px;
+    }
+
+    .nav-menu.active {
+        display: block;
+    }
+
+    .nav__container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+
+    .nav__menu {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        flex-direction: column;
+    }
+
+    /* Animate the hamburger icon */
+    .nav-toggle.active span:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav-toggle.active span:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+
+
+
+}

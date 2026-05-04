@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrestHive Basic School</title>
+    <link rel="stylesheet" href="/CSS/BASICSCHOLL.css">
+</head>
+
+<body>
+    
+
+    <script type="module"
+    src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
+<script type="module"
+    src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js"></script>
+
+<!-- Your main script file with type="module" -->
+<script type="module" src="./jsfiles/basicschool.js"></script>
+
+<!-- Firebase configuration and initialization -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js';
+import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js';
+
+// Your Firebase configuration and initialization code can go here
+
+
+</script>
+
+
+
+
+
+
+
+
+<div class="snowfall"></div>
+
+
+
+
+
+
+<button class="nav-toggle" id="nav-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- Your navigation menu goes here -->
+  <nav class="nav-menu">
+    <nav class="navi">
+        <div class="container nav__container">
+            <a href="index.html" class="school-name">
+                <h4>Crest<span style="color: rgba(255, 187, 0, 1);">Hive</span></h4>
+            </a>
+            <ul class="nav__menu">
+                <li class="school-dropdown">
+                    <a href="#school">School <i class="fas fa-caret-down"></i></a>
+                    <ul class="school-submenu">
+<li><a href="pre-basic.html"> Crest Nursery and Primary School</a></li>
+                                                <li><a href="college-extra.html">Cresthive International Schoolve international school</a></li>
+                    </ul>
+                </li>
+                <li class="school-dropdown">
+                    <a href="#school">Admission <i class="fas fa-caret-down"></i></a>
+                    <ul class="school-submenu">
+                        <li><a href="admission-process.html">Admission process</a></li>
+                        <li><a href="entrance-test.html">Entrance tests</a></li>
+                        <li><a href="holidays.html">Holidays</a></li>
+
+                    </ul>
+                </li>                <li><a href="about.html">About Us</a></li>
+            </ul>
+
+              <a href="/login.html">
+                <button class="navbtn2">Log In</button>
+            </a>
+
+            <a href="https://student.crestscholars.com/RegistrationPage">
+                <button class="navbtn">Start Registration</button>
+            </a>
+        </div>
+    </nav>
+  </nav>
+
+
+
+
+
+     <nav class="navbar">
+        <div class="container nav__container">
+            <a href="index.html" class="school-name" style="display: flex; align-items: center;">
+                <img src="assets/logo.png" style="width: 36px; height: 36px; border-radius: 999px; margin-right: 6px;" />
+                <h4>Crest<span style="color: rgba(255, 187, 0, 1);">Hive</span></h4>
+            </a>
+            <ul class="nav__menu">
+                <li class="school-dropdown">
+                    <a href="#school">School <i class="fas fa-caret-down"></i></a>
+                    <ul class="school-submenu">
+<li><a href="pre-basic.html"> Crest Nursery and Primary School</a></li>
+                                                <li><a href="college-extra.html">Cresthive International School</a></li>
+                    </ul>
+                </li>
+                <li class="school-dropdown">
+                    <a href="#school">Admission <i class="fas fa-caret-down"></i></a>
+                    <ul class="school-submenu">
+                        <li><a href="admission-process.html">Admission process</a></li>
+                        <li><a href="entrance-test.html">Entrance tests</a></li>
+                        <li><a href="holidays.html">Holidays</a></li>
+
+                    </ul>
+                </li>                <li><a href="about.html">About Us</a></li>
+            </ul>
+            <a href="https://student.crestscholars.com/RegistrationPage">
+            <button class="navbtn">Start Registration</button>
+            </a>
+        </div>
+    </nav>
+
+
+    <section class="hero">
+        <div class="hero-content">
+            <video autoplay loop muted>
+                <source src="/assets/galvideo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
+
+
+    <section class="section1">
+        <div class="container">
+            <h1 id="herotitle"> 
+
+            </h1>
+            
+            <p id="herosub">
+               
+            </p>
+           
+        </div>
+    </section>
+
+    <section class="tablet">
+        <nav class="category-navigation">
+            <ul>
+                <li><a href="#" data-category="activities"><i class="fas fa-globe"></i> More Details</a></li>
+               
+            </ul>
+        </nav>
+
+        <div class="tablet1">
+            <div class="category-content" data-category="activities">
+                <p id="detailsText">
+                  
+                </p>
+                
+                <h2>
+                    Know More: </h2>
+                <div id="activities-container"
+                class="activitylist">
+                    <ul class="activity-list">
+                        
+                    </ul>
+                </div>
+            </div>
+
+            
+
+
+
+
+
+
+    </section>
+
+
+    <section class="cta-section">
+        <h2 class="cta-sentence">Join us for an exciting educational journey!</h2>
+        <a href="https://student.crestscholars.com/RegistrationPage" class="cta-button">Get Started</a>
+    </section>
+
+
+
+    <footer class="footer">
+        <div class="footer-content">
+            <h2 class="footer-header">
+                <span class="fasthand-font">CrestHive</span> surpasses just a
+            </h2>
+            <h2 class="footer-header footer-header-fasthand">school, we are family.</h2>
+            <p class="footer-text">We imbibe knowledge without compromising</p>
+            <p class="footer-text"></p>
+            <a href="/about.html">
+            <button class="footer-button">Learn More</button>
+            </a>
+        </div>
+
+        <div class="footer-content2">
+            <div class="footer-content2">
+                <div class="contact-info">
+                    <h2>Contact Us</h2>
+                    <hr>
+                    <p><i class="fas fa-envelope"></i> Email: info@cresthive.com</p>
+                    <hr>
+                    <p><i class="fas fa-phone"></i> Phone number: 07030175401</p>
+                </div>
+                <div class="copyright">
+                    <p>&#169; 2023, All rights reserved</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <script src="school.js"></script>
+</body>
+
+</html>
