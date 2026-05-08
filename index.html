@@ -9,7 +9,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Joti+One&display=swap">
     <link rel="stylesheet" href="/CSS/style.css">
-
+<script>
+  const startYear = 2022;
+  const currentYear = new Date().getFullYear();
+  const yearDisplay = currentYear > startYear ? `${startYear}-${currentYear}` : startYear;
+  
+  document.getElementById("copyright-year").textContent = yearDisplay;
+</script>
 
 
 
@@ -525,7 +531,8 @@
                     </p>
                 </div>
                 <div class="copyright">
-                    <p>&#169; 2023, All rights reserved</p>
+                  <p>© <span id="copyright-year"></span>Cresthive International School. All rights reserved  </p>
+                 
                     <div class="social-icons">
                         <a href="#" id="linkedinfooter"><i class="fab fa-linkedin"></i></a>
                         <a href="#" id="twitterfooter"><i class="fab fa-twitter"></i></a>
