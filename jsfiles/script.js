@@ -310,10 +310,12 @@ testimonials.forEach((testimonial) => {
   const card = document.createElement("div");
   card.className = "blog-card";
 
-  // Create card-image container
-  const cardImageContainer = document.createElement("div");
-  cardImageContainer.className = "blog-card-image";
-  cardImageContainer.style.backgroundImage = `url(${testimonial.testimonialimg})`;
+  // Create image element
+const cardImage = document.createElement("img");
+cardImage.className = "blog-card-image";
+cardImage.src = testimonial.testimonialimg;
+cardImage.alt = testimonial.parentName;
+
 
   // Create p-paragraph container
   const pParagraphContainer = document.createElement("div");
@@ -339,7 +341,7 @@ testimonials.forEach((testimonial) => {
   pParagraphContainer.appendChild(paragraph);
 
   // Append card-image and p-paragraph containers to card
-  card.appendChild(cardImageContainer);
+ card.appendChild(cardImage);
   card.appendChild(titleP);
   card.appendChild(pParagraphContainer);
   card.appendChild(titlea)
@@ -357,7 +359,7 @@ testimonials.forEach((testimonial) => {
 });
 
 function openModal(title, content, image, image2, image3) {
-  modalImage.style.backgroundImage = `url(${image})`;
+ modalImage.src = image;
   modalTitle.textContent = title;
   modalContentText.innerHTML = content;
 
