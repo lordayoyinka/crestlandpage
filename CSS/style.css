@@ -863,8 +863,10 @@ a {
 
 .blog-card-image {
     height: 200px;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
     background-position: center;
+    background-color: #f2f2f2;
 }
 
 .blog-card-title {
