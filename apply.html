@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply for Admission - CrestHive International School</title>
+  <link rel="icon" href="./favicon.ico" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="/CSS/apply.css">
+</head>
+<body>
+
+  <nav class="apply-nav">
+    <a href="index.html" class="school-name" style="display:flex;align-items:center;">
+      <img src="assets/logo.png" style="width:36px;height:36px;border-radius:999px;margin-right:6px;" />
+      <h4>Crest<span style="color:rgba(255,187,0,1);">Hive</span></h4>
+    </a>
+    <a href="index.html">Back to home</a>
+  </nav>
+
+  <!-- ===================== APPLICATION FORM ===================== -->
+  <main id="formView" class="apply-container">
+    <div class="apply-header">
+      <h1>Application for Admission</h1>
+      <p>2026/2027 Session &middot; CrestHive International School</p>
+    </div>
+
+    <form id="admissionForm">
+
+      <h2 class="section-title">Personal Information (Student)</h2>
+      <div class="field-grid">
+        <div class="field">
+          <label>Student Full Name *</label>
+          <input type="text" name="studentFullName" required>
+        </div>
+        <div class="field">
+          <label>Date of Birth *</label>
+          <input type="date" name="dob" required>
+        </div>
+        <div class="field">
+          <label>Sex *</label>
+          <select name="sex" required>
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Nationality *</label>
+          <input type="text" name="nationality" required>
+        </div>
+        <div class="field">
+          <label>State of Origin</label>
+          <input type="text" name="stateOfOrigin">
+        </div>
+        <div class="field">
+          <label>Local Govt. Area</label>
+          <input type="text" name="lga">
+        </div>
+        <div class="field">
+          <label>Religion</label>
+          <input type="text" name="religion">
+        </div>
+        <div class="field field-wide">
+          <label>Residential Address *</label>
+          <input type="text" name="address" required>
+        </div>
+        <div class="field">
+          <label>Name of Last School Attended</label>
+          <input type="text" name="lastSchool">
+        </div>
+        <div class="field">
+          <label>Last Class Attended</label>
+          <input type="text" name="lastClass">
+        </div>
+        <div class="field">
+          <label>Class/Level Applying For *</label>
+          <select name="classApplyingFor" required>
+            <option value="">Select</option>
+            <option>Nursery</option>
+            <option>Primary 1</option>
+            <option>Primary 2</option>
+            <option>Primary 3</option>
+            <option>Primary 4</option>
+            <option>Primary 5</option>
+            <option>JSS 1</option>
+            <option>JSS 2</option>
+            <option>JSS 3</option>
+            <option>SS 1</option>
+            <option>SS 2</option>
+            <option>SS 3</option>
+          </select>
+        </div>
+        <div class="field field-wide">
+          <label>Any Medical Issues/Challenges</label>
+          <input type="text" name="medicalIssues" placeholder="Leave blank if none">
+        </div>
+      </div>
+
+      <h2 class="section-title">Parent/Guardian Information</h2>
+      <div class="field-grid">
+        <div class="field">
+          <label>Father's Full Name *</label>
+          <input type="text" name="fatherFullName" required>
+        </div>
+        <div class="field">
+          <label>Occupation</label>
+          <input type="text" name="fatherOccupation">
+        </div>
+        <div class="field">
+          <label>Telephone *</label>
+          <input type="tel" name="fatherPhone" required>
+        </div>
+        <div class="field">
+          <label>E-mail</label>
+          <input type="email" name="fatherEmail">
+        </div>
+        <div class="field">
+          <label>Mother's Full Name</label>
+          <input type="text" name="motherFullName">
+        </div>
+        <div class="field">
+          <label>Occupation</label>
+          <input type="text" name="motherOccupation">
+        </div>
+        <div class="field">
+          <label>Telephone</label>
+          <input type="tel" name="motherPhone">
+        </div>
+        <div class="field">
+          <label>E-mail *</label>
+          <input type="email" name="motherEmail" required>
+          <span class="hint">We'll send the admission and exam details to this email.</span>
+        </div>
+      </div>
+
+      <h2 class="section-title">Required Documents</h2>
+      <div class="field-grid">
+        <div class="field">
+          <label>Student's Copy of Birth Certificate *</label>
+          <input type="file" name="birthCertificate" accept="image/*,.pdf" required>
+        </div>
+        <div class="field">
+          <label>Last School Result *</label>
+          <input type="file" name="lastSchoolResult" accept="image/*,.pdf" required>
+        </div>
+        <div class="field">
+          <label>Passport Photograph 1 *</label>
+          <input type="file" name="passportPhoto1" accept="image/*" required>
+        </div>
+        <div class="field">
+          <label>Passport Photograph 2 *</label>
+          <input type="file" name="passportPhoto2" accept="image/*" required>
+        </div>
+      </div>
+
+      <h2 class="section-title">Affirmation</h2>
+      <div class="field-grid">
+        <div class="field field-wide">
+          <label>I, (Parent/Guardian full name) *</label>
+          <input type="text" name="affirmationName" required>
+          <span class="hint">Typing your name here confirms the information provided is accurate and can be relied upon.</span>
+        </div>
+      </div>
+
+      <div id="formError" class="form-error" style="display:none;"></div>
+
+      <button type="submit" id="submitBtn" class="apply-submit-btn">Submit Application</button>
+    </form>
+  </main>
+
+  <!-- ===================== CONFIRMATION / PRINTABLE VIEW ===================== -->
+  <main id="confirmView" class="apply-container" style="display:none;">
+    <div class="confirm-banner">
+      <h1>Application Submitted</h1>
+      <p>Please save or print your Application Reference Number below. You'll need it to check your payment status and receive your exam details.</p>
+    </div>
+
+    <div class="payment-box">
+      <h2>Next step: Confirm your admission by bank transfer</h2>
+      <p>Transfer the admission processing fee to the account below, using your <strong>Application Reference Number</strong> as the transfer description/narration so we can match it to your application.</p>
+      <ul>
+        <li><strong>Bank Name:</strong> <span id="bankName">[Add bank name]</span></li>
+        <li><strong>Account Name:</strong> <span id="bankAccountName">CrestHive International School</span></li>
+        <li><strong>Account Number:</strong> <span id="bankAccountNumber">[Add account number]</span></li>
+      </ul>
+      <p>Once your payment is confirmed, your Exam Number and Passkey will be emailed to the parent/guardian email address you provided, and will also be available on our <a href="check-status.html">Check Application Status</a> page using your Application Reference Number.</p>
+    </div>
+
+    <div id="printArea" class="print-form">
+      <div class="print-form-header">
+        <img src="assets/logo.png" class="print-logo" />
+        <div>
+          <h2>CrestHive International School</h2>
+          <p>Application for Admission &mdash; 2026/2027 Session</p>
+        </div>
+      </div>
+
+      <div class="print-ref">Application Reference Number: <span id="printRef"></span></div>
+
+      <h3>Personal Information (Student)</h3>
+      <table class="print-table" id="printStudentTable"></table>
+
+      <h3>Parent/Guardian Information</h3>
+      <table class="print-table" id="printParentTable"></table>
+
+      <h3>Affirmation</h3>
+      <p id="printAffirmation"></p>
+
+      <div class="print-signature-row">
+        <div>Parent/Guardian (Name &amp; Date)</div>
+        <div>Head of School (Signature &amp; Date)</div>
+      </div>
+
+      <p class="print-note">Please note: the student's copy of birth certificate, last school result and two passport photographs were uploaded as part of this application and do not need to be printed separately.</p>
+    </div>
+
+    <button onclick="window.print()" class="apply-submit-btn no-print">Print this form</button>
+  </main>
+
+  <script type="module" src="./jsfiles/apply.js"></script>
+</body>
+</html>

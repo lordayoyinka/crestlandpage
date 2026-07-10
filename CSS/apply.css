@@ -1,0 +1,152 @@
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', Arial, sans-serif;
+  background: #f7f7f7;
+  margin: 0;
+  color: #222;
+}
+
+.apply-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background: #fff;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.06);
+}
+
+.apply-nav a { text-decoration: none; color: #00693d; font-weight: 600; }
+.apply-nav .school-name h4 { margin: 0; font-size: 20px; }
+
+.apply-container {
+  max-width: 820px;
+  margin: 32px auto;
+  background: #fff;
+  border-radius: 10px;
+  padding: 32px;
+  box-shadow: 0px 0px 20px rgba(0,0,0,0.06);
+}
+
+.apply-header h1 { color: #00693d; margin-bottom: 4px; }
+.apply-header p { color: #666; margin-top: 0; margin-bottom: 24px; }
+
+.section-title {
+  background: #00693d;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-top: 28px;
+  margin-bottom: 16px;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 20px;
+}
+
+.field { display: flex; flex-direction: column; }
+.field-wide { grid-column: 1 / -1; }
+
+.field label { font-weight: 600; font-size: 14px; margin-bottom: 6px; }
+.field .hint { font-size: 12px; color: #888; margin-top: 4px; }
+
+.field input, .field select {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.field input:focus, .field select:focus {
+  outline: none;
+  border-color: #00693d;
+}
+
+.form-error {
+  background: #fdecea;
+  color: #b3261e;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-top: 20px;
+}
+
+.apply-submit-btn {
+  margin-top: 28px;
+  background: #ffbb00;
+  color: #1a1a1a;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.apply-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.apply-submit-btn:hover:not(:disabled) { background: #e6a800; }
+
+/* ---- Confirmation / bank transfer box ---- */
+.confirm-banner h1 { color: #00693d; }
+.payment-box {
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0 32px;
+}
+.payment-box ul { margin: 12px 0; padding-left: 20px; }
+.payment-box a { color: #00693d; font-weight: 600; }
+
+/* ---- Printable replica of the paper form ---- */
+.print-form {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 24px;
+}
+.print-form-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 2px solid #00693d;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+.print-logo { width: 56px; height: 56px; border-radius: 999px; }
+.print-form-header h2 { margin: 0; color: #00693d; }
+.print-form-header p { margin: 0; color: #666; }
+
+.print-ref {
+  background: #f2f2f2;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.print-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+.print-table td {
+  border: 1px solid #ddd;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+.print-table td.label { background: #fafafa; font-weight: 600; width: 40%; }
+
+.print-signature-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  padding-top: 16px;
+  border-top: 1px solid #ddd;
+  font-size: 13px;
+  color: #555;
+}
+
+.print-note { font-size: 12px; color: #888; margin-top: 20px; }
+
+@media print {
+  .apply-nav, .payment-box, .no-print, .confirm-banner { display: none !important; }
+  .apply-container { box-shadow: none; margin: 0; max-width: 100%; }
+}

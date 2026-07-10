@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check Application Status - CrestHive International School</title>
+  <link rel="icon" href="./favicon.ico" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="/CSS/apply.css">
+</head>
+<body>
+
+  <nav class="apply-nav">
+    <a href="index.html" class="school-name" style="display:flex;align-items:center;">
+      <img src="assets/logo.png" style="width:36px;height:36px;border-radius:999px;margin-right:6px;" />
+      <h4>Crest<span style="color:rgba(255,187,0,1);">Hive</span></h4>
+    </a>
+    <a href="index.html">Back to home</a>
+  </nav>
+
+  <main class="apply-container" style="max-width:520px;">
+    <div class="apply-header">
+      <h1>Check Application Status</h1>
+      <p>Enter your Application Reference Number and surname to check your payment status and retrieve your exam details.</p>
+    </div>
+
+    <form id="statusForm">
+      <div class="field-grid" style="grid-template-columns:1fr;">
+        <div class="field">
+          <label>Application Reference Number *</label>
+          <input type="text" name="applicationRef" placeholder="CH-2026-XXXXXX" required>
+        </div>
+        <div class="field">
+          <label>Surname (Student or Parent/Guardian) *</label>
+          <input type="text" name="surname" required>
+        </div>
+      </div>
+
+      <div id="statusError" class="form-error" style="display:none;"></div>
+
+      <button type="submit" id="checkBtn" class="apply-submit-btn">Check Status</button>
+    </form>
+
+    <div id="resultBox" style="display:none; margin-top:24px;"></div>
+  </main>
+
+  <script type="module" src="./jsfiles/check-status.js"></script>
+</body>
+</html>
