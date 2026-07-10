@@ -83,7 +83,23 @@ import { getFirestore, collection, getDocs, getDoc, doc } from 'https://www.gsta
 
 var pagedata = null;
 
-fetch('./../.netlify/functions/configfile')
+// Works whether the site is running on Vercel (/api/configfile) or
+// Netlify (.netlify/functions/configfile) — tries Vercel first, falls
+// back to Netlify, so the same repo deploys cleanly on either host.
+async function fetchFirebaseConfigJson() {
+  const endpoints = ['/api/configfile', './../.netlify/functions/configfile'];
+  for (const url of endpoints) {
+    try {
+      const response = await fetch(url);
+      if (response.ok) return response;
+    } catch (e) {
+      // try the next endpoint
+    }
+  }
+  throw new Error('Could not load Firebase config from /api/configfile or the Netlify function.');
+}
+
+fetchFirebaseConfigJson()
   .then(response => response.json())
   .then (async data => {
     const firebaseConfig = data.firebaseConfig;
@@ -284,6 +300,8 @@ const modal = document.getElementById("myModal");
 const modalImage = document.getElementById("modalImage");
 const modalTitle = document.getElementById("modalTitle");
 const modalContentText = document.getElementById("modalContentText");
+const modalImage2 = document.getElementById("modalImage2");
+const modalImage3 = document.getElementById("modalImage3");
 
 
 // Loop through testimonials and create cards
@@ -327,15 +345,37 @@ testimonials.forEach((testimonial) => {
   card.appendChild(titlea)
 
 
-  card.addEventListener("click", () => openModal( testimonial.parentName, paragraph.innerHTML, testimonial.testimonialimg));
+  card.addEventListener("click", () => openModal(
+    testimonial.parentName,
+    paragraph.innerHTML,
+    testimonial.testimonialimg,
+    testimonial.testimonialimg2,
+    testimonial.testimonialimg3
+  ));
   
   cardContainer.appendChild(card);
 });
 
-function openModal(title, content, image ) {
+function openModal(title, content, image, image2, image3) {
   modalImage.style.backgroundImage = `url(${image})`;
   modalTitle.textContent = title;
   modalContentText.innerHTML = content;
+
+  // Column images are optional — only show them if a URL was provided in the CMS
+  if (image2) {
+    modalImage2.style.backgroundImage = `url(${image2})`;
+    modalImage2.style.display = "block";
+  } else {
+    modalImage2.style.display = "none";
+  }
+
+  if (image3) {
+    modalImage3.style.backgroundImage = `url(${image3})`;
+    modalImage3.style.display = "block";
+  } else {
+    modalImage3.style.display = "none";
+  }
+
   modal.style.display = "flex";
 }
 

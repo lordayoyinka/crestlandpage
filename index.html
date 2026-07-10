@@ -65,6 +65,21 @@
             margin-top: 10px;
         }
 
+        .modal-columns {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .modal-column-image {
+            flex: 1;
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            display: none; /* shown via JS only when a URL is provided */
+        }
+
         .close-modal {
             font-size: 24px;
             width: 80px;
@@ -439,6 +454,10 @@
             <div class="modal-image" id="modalImage"></div>
             <div class="modal-title" id="modalTitle"></div>
             <div class="modal-content-text" id="modalContentText"></div>
+            <div class="modal-columns">
+                <div class="modal-column-image" id="modalImage2"></div>
+                <div class="modal-column-image" id="modalImage3"></div>
+            </div>
         </div>
     </div>
 
