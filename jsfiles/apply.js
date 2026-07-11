@@ -48,6 +48,63 @@ function fileToBase64(file) {
   });
 }
 
+// Phone photos are often 3-8MB, and Vercel serverless functions hard-cap
+// request bodies at 4.5MB. Compressing images client-side before they're
+// base64-encoded and sent keeps submissions well under that limit.
+function compressImageFile(file, maxDimension = 1400, quality = 0.72) {
+  return new Promise((resolve, reject) => {
+    if (!file.type.startsWith('image/')) {
+      resolve(file); // leave non-images (e.g. PDFs) untouched
+      return;
+    }
+
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+
+    img.onload = () => {
+      let { width, height } = img;
+      if (width > maxDimension || height > maxDimension) {
+        if (width > height) {
+          height = Math.round((height * maxDimension) / width);
+          width = maxDimension;
+        } else {
+          width = Math.round((width * maxDimension) / height);
+          height = maxDimension;
+        }
+      }
+
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+
+      canvas.toBlob(
+        (blob) => {
+          URL.revokeObjectURL(objectUrl);
+          if (!blob) {
+            resolve(file); // fall back to original if compression fails
+            return;
+          }
+          resolve(new File([blob], file.name.replace(/\.[^.]+$/, '.jpg'), { type: 'image/jpeg' }));
+        },
+        'image/jpeg',
+        quality
+      );
+    };
+
+    img.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      resolve(file); // fall back to original if it can't be loaded as an image
+    };
+
+    img.src = objectUrl;
+  });
+}
+
+// Rough safety net: base64 adds ~33% overhead, and Vercel's serverless
+// function request-body limit is 4.5MB. Stay comfortably under that.
+const MAX_TOTAL_PAYLOAD_BYTES = 4 * 1024 * 1024;
+
 // A non-sequential, hard-to-guess reference number. Doubles as the
 // public lookup key for the "Check Application Status" page, so it
 // must not be predictable.
@@ -80,14 +137,28 @@ form.addEventListener('submit', async (e) => {
 
     const fileFields = ['birthCertificate', 'lastSchoolResult', 'passportPhoto1', 'passportPhoto2'];
     const files = {};
+    let totalBytes = 0;
+
     for (const fieldName of fileFields) {
-      const file = form.querySelector(`[name="${fieldName}"]`).files[0];
-      if (!file) throw new Error(`Missing required file: ${fieldName}`);
+      const rawFile = form.querySelector(`[name="${fieldName}"]`).files[0];
+      if (!rawFile) throw new Error(`Missing required file: ${fieldName}`);
+
+      const processedFile = await compressImageFile(rawFile);
+      const contentBase64 = await fileToBase64(processedFile);
+      totalBytes += contentBase64.length;
+
       files[fieldName] = {
-        filename: file.name,
-        mimeType: file.type,
-        contentBase64: await fileToBase64(file),
+        filename: processedFile.name,
+        mimeType: processedFile.type,
+        contentBase64,
       };
+    }
+
+    if (totalBytes > MAX_TOTAL_PAYLOAD_BYTES) {
+      throw new Error(
+        'Your uploaded files are too large even after compression (this usually happens with a large PDF). ' +
+        'Please use a smaller/scanned version of the birth certificate or school result and try again.'
+      );
     }
 
     const applicationRef = generateApplicationRef();

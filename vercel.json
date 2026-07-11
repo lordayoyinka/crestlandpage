@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/submit-application.js": {
+      "maxDuration": 30
+    }
+  }
+}

@@ -168,9 +168,11 @@ module.exports = async (req, res) => {
 
   try {
     const safeRef = String(applicationRef).replace(/[^a-zA-Z0-9_-]/g, '-');
-    const documents = {};
 
-    for (const [fieldName, file] of Object.entries(files)) {
+    // Run all document commits AND the PDF build/commit in parallel instead
+    // of one-at-a-time — this was previously up to 10 sequential GitHub API
+    // round-trips, which risked exceeding Vercel's function timeout.
+    const documentUploadPromises = Object.entries(files).map(async ([fieldName, file]) => {
       const ext = (file.filename || '').split('.').pop() || 'bin';
       const path = `applications/${safeRef}/${fieldName}.${ext}`;
       await commitFileToGitHub({
@@ -178,18 +180,23 @@ module.exports = async (req, res) => {
         contentBase64: file.contentBase64,
         message: `Admission docs: add ${fieldName} for ${safeRef}`,
       });
-      documents[fieldName] = path;
-    }
-
-    const pdfBytes = await buildAdmissionPdf(applicationRef, fields);
-    const pdfBase64 = Buffer.from(pdfBytes).toString('base64');
-    const pdfPath = `applications/${safeRef}/admission-form.pdf`;
-    await commitFileToGitHub({
-      owner, repo, branch, token, path: pdfPath,
-      contentBase64: pdfBase64,
-      message: `Admission docs: add form PDF for ${safeRef}`,
+      return [fieldName, path];
     });
-    documents.formPdf = pdfPath;
+
+    const pdfUploadPromise = (async () => {
+      const pdfBytes = await buildAdmissionPdf(applicationRef, fields);
+      const pdfBase64 = Buffer.from(pdfBytes).toString('base64');
+      const pdfPath = `applications/${safeRef}/admission-form.pdf`;
+      await commitFileToGitHub({
+        owner, repo, branch, token, path: pdfPath,
+        contentBase64: pdfBase64,
+        message: `Admission docs: add form PDF for ${safeRef}`,
+      });
+      return ['formPdf', pdfPath];
+    })();
+
+    const results = await Promise.all([...documentUploadPromises, pdfUploadPromise]);
+    const documents = Object.fromEntries(results);
 
     return res.status(200).json({ documents });
   } catch (err) {
