@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "main": "getImage.js",
     "dependencies": {
-      "node-fetch": "^2.6.1"
+      "node-fetch": "^2.6.1",
+      "pdf-lib": "^1.17.1",
+      "firebase-admin": "^12.1.0"
     }
   }
-  
