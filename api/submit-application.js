@@ -78,7 +78,7 @@ async function commitFilesToGitHub({ owner, repo, branch, token, files, message 
 }
 
 function wrapText(text, maxChars) {
-  if (!text) return [''];
+  if (!text) return ['-'];
   const words = String(text).split(' ');
   const lines = [];
   let line = '';
@@ -91,90 +91,126 @@ function wrapText(text, maxChars) {
     }
   }
   if (line.trim()) lines.push(line.trim());
-  return lines;
+  return lines.length ? lines : ['-'];
 }
 
-async function buildAdmissionPdf(applicationRef, fields) {
+// Mirrors apply.js's row2(): two label/value pairs side by side, matching
+// the two-column layout of both the original paper form and the on-screen
+// printable confirmation. Row height auto-grows to fit whichever cell
+// wraps to the most lines (e.g. a long Residential Address).
+async function buildAdmissionPdf(applicationRef, fields, passportPhoto) {
   const pdfDoc = await PDFDocument.create();
   const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
   const bold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
 
-  let page = pdfDoc.addPage([595, 842]); // A4
-  const margin = 50;
-  let y = 800;
+  const page = pdfDoc.addPage([595, 842]); // A4
+  const margin = 40;
+  const contentWidth = 595 - margin * 2; // 515
+  const labelW = 85;
+  const valueW = contentWidth / 2 - labelW; // 172.5
+  const col2X = margin + labelW + valueW; // start of second label/value pair
   const green = rgb(0, 0.41, 0.24);
+  const gray = rgb(0.45, 0.45, 0.45);
+  const lightBg = rgb(0.97, 0.97, 0.97);
 
-  const newPageIfNeeded = (spaceNeeded = 20) => {
-    if (y < margin + spaceNeeded) {
-      page = pdfDoc.addPage([595, 842]);
-      y = 800;
+  let y = 800;
+
+  // --- Header: title/subtitle on the left, passport photo top-right ---
+  page.drawText('CrestHive International School', { x: margin, y, size: 17, font: bold, color: green });
+  y -= 16;
+  page.drawText('Application for Admission - 2026/2027 Session', { x: margin, y, size: 10.5, font, color: gray });
+
+  const photoW = 75;
+  const photoH = 95;
+  const photoX = margin + contentWidth - photoW;
+  const photoY = 800 - photoH + 12;
+  if (passportPhoto) {
+    try {
+      const bytes = Buffer.from(passportPhoto.contentBase64, 'base64');
+      const image = passportPhoto.mimeType === 'image/png'
+        ? await pdfDoc.embedPng(bytes)
+        : await pdfDoc.embedJpg(bytes);
+      page.drawImage(image, { x: photoX, y: photoY, width: photoW, height: photoH });
+      page.drawRectangle({ x: photoX, y: photoY, width: photoW, height: photoH, borderColor: rgb(0.7, 0.7, 0.7), borderWidth: 1 });
+    } catch (e) {
+      console.error('Could not embed passport photo in PDF:', e);
     }
-  };
+  }
 
-  const drawTitle = (text, size = 18) => {
-    page.drawText(text, { x: margin, y, size, font: bold, color: green });
-    y -= size + 10;
-  };
+  y -= 14;
+  page.drawLine({ start: { x: margin, y }, end: { x: margin + contentWidth, y }, thickness: 1.5, color: green });
+  y -= 18;
+
+  page.drawText(`Application Reference Number: ${applicationRef}`, { x: margin, y, size: 11, font: bold, color: rgb(0, 0, 0) });
+  y -= 22;
 
   const drawSectionHeader = (text) => {
-    newPageIfNeeded(40);
-    y -= 6;
-    page.drawRectangle({ x: margin, y: y - 4, width: 495, height: 22, color: green });
-    page.drawText(text, { x: margin + 8, y: y + 2, size: 12, font: bold, color: rgb(1, 1, 1) });
-    y -= 30;
+    page.drawRectangle({ x: margin, y: y - 4, width: contentWidth, height: 18, color: green });
+    page.drawText(text, { x: margin + 8, y: y, size: 10.5, font: bold, color: rgb(1, 1, 1) });
+    y -= 24;
   };
 
-  const drawField = (label, value) => {
-    const lines = wrapText(value || '-', 70);
-    newPageIfNeeded(16 * lines.length + 6);
-    page.drawText(`${label}:`, { x: margin, y, size: 10, font: bold, color: rgb(0.2, 0.2, 0.2) });
-    y -= 14;
-    lines.forEach((line) => {
-      page.drawText(line, { x: margin + 10, y, size: 11, font, color: rgb(0, 0, 0) });
-      y -= 15;
+  // Draws one row with two label/value pairs, growing height to fit wraps.
+  const drawRow2 = (label1, value1, label2, value2) => {
+    const lines1 = wrapText(value1, 26);
+    const lines2 = label2 ? wrapText(value2, 26) : [''];
+    const maxLines = Math.max(lines1.length, lines2.length, 1);
+    const rowH = 11 * maxLines + 6;
+
+    page.drawRectangle({ x: margin, y: y - rowH, width: labelW, height: rowH, color: lightBg });
+    page.drawRectangle({ x: col2X, y: y - rowH, width: labelW, height: rowH, color: lightBg });
+    page.drawRectangle({ x: margin, y: y - rowH, width: contentWidth, height: rowH, borderColor: rgb(0.85, 0.85, 0.85), borderWidth: 0.5 });
+    page.drawLine({ start: { x: margin + labelW, y }, end: { x: margin + labelW, y: y - rowH }, thickness: 0.5, color: rgb(0.85, 0.85, 0.85) });
+    page.drawLine({ start: { x: col2X, y }, end: { x: col2X, y: y - rowH }, thickness: 0.5, color: rgb(0.85, 0.85, 0.85) });
+    page.drawLine({ start: { x: col2X + labelW, y }, end: { x: col2X + labelW, y: y - rowH }, thickness: 0.5, color: rgb(0.85, 0.85, 0.85) });
+
+    page.drawText(label1, { x: margin + 4, y: y - 10, size: 8, font: bold, color: rgb(0.2, 0.2, 0.2) });
+    lines1.forEach((line, i) => {
+      page.drawText(line, { x: margin + labelW + 4, y: y - 10 - i * 11, size: 8, font, color: rgb(0, 0, 0) });
     });
-    y -= 4;
-  };
 
-  drawTitle('CrestHive International School');
-  page.drawText('Application for Admission - 2026/2027 Session', { x: margin, y, size: 12, font, color: rgb(0.3, 0.3, 0.3) });
-  y -= 22;
-  page.drawText(`Application Reference Number: ${applicationRef}`, { x: margin, y, size: 11, font: bold, color: rgb(0, 0, 0) });
-  y -= 26;
+    if (label2) {
+      page.drawText(label2, { x: col2X + 4, y: y - 10, size: 8, font: bold, color: rgb(0.2, 0.2, 0.2) });
+      lines2.forEach((line, i) => {
+        page.drawText(line, { x: col2X + labelW + 4, y: y - 10 - i * 11, size: 8, font, color: rgb(0, 0, 0) });
+      });
+    }
+
+    y -= rowH;
+  };
 
   drawSectionHeader('PERSONAL INFORMATION (STUDENT)');
-  drawField('Student Full Name', fields.studentFullName);
-  drawField('Date of Birth', fields.dob);
-  drawField('Sex', fields.sex);
-  drawField('Nationality', fields.nationality);
-  drawField('State of Origin', fields.stateOfOrigin);
-  drawField('Local Govt. Area', fields.lga);
-  drawField('Religion', fields.religion);
-  drawField('Residential Address', fields.address);
-  drawField('Name of Last School Attended', fields.lastSchool);
-  drawField('Last Class Attended', fields.lastClass);
-  drawField('Class Applying For', fields.classApplyingFor);
-  drawField('Any Medical Issues/Challenges', fields.medicalIssues);
+  drawRow2('Student Full Name', fields.studentFullName, 'Sex', fields.sex);
+  drawRow2('Date of Birth', fields.dob, 'Nationality', fields.nationality);
+  drawRow2('State of Origin', fields.stateOfOrigin, 'Local Govt. Area', fields.lga);
+  drawRow2('Religion', fields.religion, 'Class Applying For', fields.classApplyingFor);
+  drawRow2('Residential Address', fields.address, 'Name of Last School Attended', fields.lastSchool);
+  drawRow2('Last Class Attended', fields.lastClass, 'Medical Issues/Challenges', fields.medicalIssues);
+  y -= 8;
 
   drawSectionHeader('PARENT/GUARDIAN INFORMATION');
-  drawField("Father's Full Name", fields.fatherFullName);
-  drawField('Occupation', fields.fatherOccupation);
-  drawField('Telephone', fields.fatherPhone);
-  drawField("Mother's Full Name", fields.motherFullName);
-  drawField('Occupation', fields.motherOccupation);
-  drawField('Telephone', fields.motherPhone);
-  drawField('Parent/Guardian E-mail', fields.guardianEmail);
+  drawRow2("Father's Full Name", fields.fatherFullName, "Mother's Full Name", fields.motherFullName);
+  drawRow2('Occupation', fields.fatherOccupation, 'Occupation', fields.motherOccupation);
+  drawRow2('Telephone', fields.fatherPhone, 'Telephone', fields.motherPhone);
+  drawRow2('Parent/Guardian E-mail', fields.guardianEmail, '', '');
+  y -= 8;
 
   drawSectionHeader('AFFIRMATION');
-  drawField('', `I, ${fields.affirmationName}, hereby affirm that information provided here is accurate and can be relied upon.`);
+  const affLines = wrapText(`I, ${fields.affirmationName}, hereby affirm that information provided here is accurate and can be relied upon.`, 95);
+  affLines.forEach((line) => {
+    page.drawText(line, { x: margin, y, size: 9.5, font, color: rgb(0, 0, 0) });
+    y -= 13;
+  });
 
-  newPageIfNeeded(60);
+  y -= 24;
+  page.drawLine({ start: { x: margin, y }, end: { x: margin + 210, y }, thickness: 1, color: rgb(0.6, 0.6, 0.6) });
+  page.drawLine({ start: { x: margin + 305, y }, end: { x: margin + contentWidth, y }, thickness: 1, color: rgb(0.6, 0.6, 0.6) });
+  y -= 11;
+  page.drawText('Parent/Guardian (Signature & Date)', { x: margin, y, size: 8, font, color: gray });
+  page.drawText('Head of School (Signature & Date)', { x: margin + 305, y, size: 8, font, color: gray });
+
   y -= 20;
-  page.drawLine({ start: { x: margin, y }, end: { x: margin + 200, y }, thickness: 1, color: rgb(0.6, 0.6, 0.6) });
-  page.drawLine({ start: { x: margin + 295, y }, end: { x: margin + 495, y }, thickness: 1, color: rgb(0.6, 0.6, 0.6) });
-  y -= 12;
-  page.drawText('Parent/Guardian (Signature & Date)', { x: margin, y, size: 9, font, color: rgb(0.4, 0.4, 0.4) });
-  page.drawText('Head of School (Signature & Date)', { x: margin + 295, y, size: 9, font, color: rgb(0.4, 0.4, 0.4) });
+  page.drawText('Note: birth certificate and last school result were uploaded as part of this application.', { x: margin, y, size: 7, font, color: gray });
 
   return pdfDoc.save();
 }
@@ -202,10 +238,10 @@ module.exports = async (req, res) => {
     const safeRef = String(applicationRef).replace(/[^a-zA-Z0-9_-]/g, '-');
 
     // Build the PDF first (pure CPU work, no network), then commit
-    // everything — the 4 uploaded documents plus the PDF — in one
+    // everything — the 3 uploaded documents plus the PDF — in one
     // single atomic Git commit. This avoids the branch-ref race that
     // happens when multiple separate commits are pushed concurrently.
-    const pdfBytes = await buildAdmissionPdf(applicationRef, fields);
+    const pdfBytes = await buildAdmissionPdf(applicationRef, fields, files.passportPhoto);
     const pdfBase64 = Buffer.from(pdfBytes).toString('base64');
 
     const fileList = Object.entries(files).map(([fieldName, file]) => {
