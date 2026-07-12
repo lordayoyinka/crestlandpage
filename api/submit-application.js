@@ -16,32 +16,65 @@
 
 const { PDFDocument, StandardFonts, rgb } = require('pdf-lib');
 
-async function commitFileToGitHub({ owner, repo, branch, token, path, contentBase64, message }) {
-  const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+// Commits multiple files to GitHub in a SINGLE atomic commit, using the
+// low-level Git Data API instead of the Contents API. This matters because
+// the Contents API (one PUT per file) requires each request to know the
+// current branch position — running several of those in parallel causes a
+// race ("Reference already exists" / 409), since they all read the same
+// starting point and then fight over updating the branch ref. Blob creation
+// below is safe to parallelize (it doesn't touch the branch); only the
+// final tree -> commit -> ref update happens once, in sequence.
+async function commitFilesToGitHub({ owner, repo, branch, token, files, message }) {
+  const headers = { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' };
+  const base = `https://api.github.com/repos/${owner}/${repo}`;
 
-  let sha;
-  const existing = await fetch(`${apiUrl}?ref=${branch}`, {
-    headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' },
+  const refRes = await fetch(`${base}/git/refs/heads/${branch}`, { headers });
+  if (!refRes.ok) throw new Error(`Could not read branch ref: ${await refRes.text()}`);
+  const latestCommitSha = (await refRes.json()).object.sha;
+
+  const commitRes = await fetch(`${base}/git/commits/${latestCommitSha}`, { headers });
+  if (!commitRes.ok) throw new Error(`Could not read base commit: ${await commitRes.text()}`);
+  const baseTreeSha = (await commitRes.json()).tree.sha;
+
+  // Create a blob for each file in parallel — this is the part that
+  // actually uploads the (base64) content, and is safe to run concurrently.
+  const blobs = await Promise.all(
+    files.map(async (f) => {
+      const blobRes = await fetch(`${base}/git/blobs`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ content: f.contentBase64, encoding: 'base64' }),
+      });
+      if (!blobRes.ok) throw new Error(`Blob creation failed for ${f.path}: ${await blobRes.text()}`);
+      const { sha } = await blobRes.json();
+      return { path: f.path, mode: '100644', type: 'blob', sha };
+    })
+  );
+
+  const treeRes = await fetch(`${base}/git/trees`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({ base_tree: baseTreeSha, tree: blobs }),
   });
-  if (existing.status === 200) {
-    sha = (await existing.json()).sha;
-  }
+  if (!treeRes.ok) throw new Error(`Tree creation failed: ${await treeRes.text()}`);
+  const newTreeSha = (await treeRes.json()).sha;
 
-  const res = await fetch(apiUrl, {
-    method: 'PUT',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: 'application/vnd.github+json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ message, content: contentBase64, branch, ...(sha ? { sha } : {}) }),
+  const newCommitRes = await fetch(`${base}/git/commits`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({ message, tree: newTreeSha, parents: [latestCommitSha] }),
   });
+  if (!newCommitRes.ok) throw new Error(`Commit creation failed: ${await newCommitRes.text()}`);
+  const newCommitSha = (await newCommitRes.json()).sha;
 
-  if (!res.ok) {
-    const errBody = await res.text();
-    throw new Error(`GitHub commit failed for ${path}: ${errBody}`);
-  }
-  return path;
+  const updateRefRes = await fetch(`${base}/git/refs/heads/${branch}`, {
+    method: 'PATCH',
+    headers,
+    body: JSON.stringify({ sha: newCommitSha }),
+  });
+  if (!updateRefRes.ok) throw new Error(`Ref update failed: ${await updateRefRes.text()}`);
+
+  return files.map((f) => f.path);
 }
 
 function wrapText(text, maxChars) {
@@ -169,34 +202,34 @@ module.exports = async (req, res) => {
   try {
     const safeRef = String(applicationRef).replace(/[^a-zA-Z0-9_-]/g, '-');
 
-    // Run all document commits AND the PDF build/commit in parallel instead
-    // of one-at-a-time — this was previously up to 10 sequential GitHub API
-    // round-trips, which risked exceeding Vercel's function timeout.
-    const documentUploadPromises = Object.entries(files).map(async ([fieldName, file]) => {
+    // Build the PDF first (pure CPU work, no network), then commit
+    // everything — the 4 uploaded documents plus the PDF — in one
+    // single atomic Git commit. This avoids the branch-ref race that
+    // happens when multiple separate commits are pushed concurrently.
+    const pdfBytes = await buildAdmissionPdf(applicationRef, fields);
+    const pdfBase64 = Buffer.from(pdfBytes).toString('base64');
+
+    const fileList = Object.entries(files).map(([fieldName, file]) => {
       const ext = (file.filename || '').split('.').pop() || 'bin';
-      const path = `applications/${safeRef}/${fieldName}.${ext}`;
-      await commitFileToGitHub({
-        owner, repo, branch, token, path,
+      return {
+        fieldName,
+        path: `applications/${safeRef}/${fieldName}.${ext}`,
         contentBase64: file.contentBase64,
-        message: `Admission docs: add ${fieldName} for ${safeRef}`,
-      });
-      return [fieldName, path];
+      };
+    });
+    fileList.push({
+      fieldName: 'formPdf',
+      path: `applications/${safeRef}/admission-form.pdf`,
+      contentBase64: pdfBase64,
     });
 
-    const pdfUploadPromise = (async () => {
-      const pdfBytes = await buildAdmissionPdf(applicationRef, fields);
-      const pdfBase64 = Buffer.from(pdfBytes).toString('base64');
-      const pdfPath = `applications/${safeRef}/admission-form.pdf`;
-      await commitFileToGitHub({
-        owner, repo, branch, token, path: pdfPath,
-        contentBase64: pdfBase64,
-        message: `Admission docs: add form PDF for ${safeRef}`,
-      });
-      return ['formPdf', pdfPath];
-    })();
+    await commitFilesToGitHub({
+      owner, repo, branch, token,
+      files: fileList,
+      message: `Admission docs: add application ${safeRef}`,
+    });
 
-    const results = await Promise.all([...documentUploadPromises, pdfUploadPromise]);
-    const documents = Object.fromEntries(results);
+    const documents = Object.fromEntries(fileList.map((f) => [f.fieldName, f.path]));
 
     return res.status(200).json({ documents });
   } catch (err) {
