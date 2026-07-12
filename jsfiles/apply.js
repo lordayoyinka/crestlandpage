@@ -227,15 +227,21 @@ form.addEventListener('submit', async (e) => {
   }
 });
 
-function row(table, label, value) {
+// Builds one table row containing two label/value pairs side by side
+// (matching the original paper form's two-column layout), instead of
+// one field per row — this roughly halves the printed table height.
+function row2(table, label1, value1, label2, value2) {
   const tr = document.createElement('tr');
-  const tdLabel = document.createElement('td');
-  tdLabel.className = 'label';
-  tdLabel.textContent = label;
-  const tdValue = document.createElement('td');
-  tdValue.textContent = value || '-';
-  tr.appendChild(tdLabel);
-  tr.appendChild(tdValue);
+  const cells = [
+    ['label', label1], ['value', value1 || '-'],
+    ['label', label2 ?? ''], ['value', label2 ? (value2 || '-') : ''],
+  ];
+  cells.forEach(([cls, text]) => {
+    const td = document.createElement('td');
+    td.className = cls;
+    td.textContent = text;
+    tr.appendChild(td);
+  });
   table.appendChild(tr);
 }
 
@@ -243,28 +249,18 @@ function renderConfirmation(fields, applicationRef) {
   document.getElementById('printRef').textContent = applicationRef;
 
   const studentTable = document.getElementById('printStudentTable');
-  row(studentTable, 'Student Full Name', fields.studentFullName);
-  row(studentTable, 'Date of Birth', fields.dob);
-  row(studentTable, 'Sex', fields.sex);
-  row(studentTable, 'Nationality', fields.nationality);
-  row(studentTable, 'State of Origin', fields.stateOfOrigin);
-  row(studentTable, 'Local Govt. Area', fields.lga);
-  row(studentTable, 'Religion', fields.religion);
-  row(studentTable, 'Residential Address', fields.address);
-  row(studentTable, 'Name of Last School Attended', fields.lastSchool);
-  row(studentTable, 'Last Class Attended', fields.lastClass);
-  row(studentTable, 'Class Applying For', fields.classApplyingFor);
-  row(studentTable, 'Medical Issues/Challenges', fields.medicalIssues);
+  row2(studentTable, 'Student Full Name', fields.studentFullName, 'Sex', fields.sex);
+  row2(studentTable, 'Date of Birth', fields.dob, 'Nationality', fields.nationality);
+  row2(studentTable, 'State of Origin', fields.stateOfOrigin, 'Local Govt. Area', fields.lga);
+  row2(studentTable, 'Religion', fields.religion, 'Class Applying For', fields.classApplyingFor);
+  row2(studentTable, 'Residential Address', fields.address, 'Name of Last School Attended', fields.lastSchool);
+  row2(studentTable, 'Last Class Attended', fields.lastClass, 'Medical Issues/Challenges', fields.medicalIssues);
 
   const parentTable = document.getElementById('printParentTable');
-  row(parentTable, "Father's Full Name", fields.fatherFullName);
-  row(parentTable, 'Occupation', fields.fatherOccupation);
-  row(parentTable, 'Telephone', fields.fatherPhone);
-  row(parentTable, 'E-mail', fields.fatherEmail);
-  row(parentTable, "Mother's Full Name", fields.motherFullName);
-  row(parentTable, 'Occupation', fields.motherOccupation);
-  row(parentTable, 'Telephone', fields.motherPhone);
-  row(parentTable, 'E-mail', fields.motherEmail);
+  row2(parentTable, "Father's Full Name", fields.fatherFullName, "Mother's Full Name", fields.motherFullName);
+  row2(parentTable, 'Occupation', fields.fatherOccupation, 'Occupation', fields.motherOccupation);
+  row2(parentTable, 'Telephone', fields.fatherPhone, 'Telephone', fields.motherPhone);
+  row2(parentTable, 'E-mail', fields.fatherEmail, 'E-mail', fields.motherEmail);
 
   document.getElementById('printAffirmation').textContent =
     `I, ${fields.affirmationName}, hereby affirm that information provided here is accurate and can be relied upon.`;
