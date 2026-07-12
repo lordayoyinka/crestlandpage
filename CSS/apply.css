@@ -115,8 +115,18 @@ body {
   margin-bottom: 12px;
 }
 .print-logo { width: 56px; height: 56px; border-radius: 999px; }
+.print-form-header-text { flex: 1; }
 .print-form-header h2 { margin: 0; color: #00693d; }
 .print-form-header p { margin: 0; color: #666; }
+
+.print-passport-photo {
+  width: 80px;
+  height: 100px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #f2f2f2;
+}
 
 .print-ref {
   background: #f2f2f2;
@@ -150,27 +160,27 @@ body {
 @media print {
   @page {
     size: A4;
-    margin: 8mm;
+    margin: 12mm;
   }
 
   .apply-nav, .payment-box, .no-print, .confirm-banner { display: none !important; }
   .apply-container { box-shadow: none; margin: 0; max-width: 100%; padding: 0; }
 
   .print-form { border: none; padding: 0; }
-  .print-form-header { padding-bottom: 6px; margin-bottom: 6px; gap: 10px; }
-  .print-logo { width: 38px; height: 38px; }
-  .print-form-header h2 { font-size: 15px; }
-  .print-form-header p { font-size: 11px; }
+  .print-form-header { padding-bottom: 10px; margin-bottom: 10px; }
+  .print-logo { width: 52px; height: 52px; }
+  .print-form-header h2 { font-size: 19px; }
+  .print-form-header p { font-size: 13px; }
 
-  .print-ref { padding: 4px 8px; margin-bottom: 8px; font-size: 12px; }
+  .print-ref { padding: 6px 10px; margin-bottom: 12px; font-size: 13px; }
 
-  .print-form h3 { font-size: 12px; margin: 8px 0 4px; }
+  .print-form h3 { font-size: 14px; margin: 12px 0 6px; }
 
-  .print-table { margin-bottom: 6px; }
-  .print-table td { padding: 3px 6px; font-size: 9.5px; line-height: 1.2; }
+  .print-table { margin-bottom: 10px; }
+  .print-table td { padding: 6px 10px; font-size: 12px; line-height: 1.35; }
 
-  .print-form p { font-size: 10px; margin: 4px 0; }
+  .print-form p { font-size: 12px; margin: 6px 0; }
 
-  .print-signature-row { margin-top: 16px; padding-top: 6px; font-size: 9px; }
-  .print-note { font-size: 8px; margin-top: 8px; }
+  .print-signature-row { margin-top: 30px; padding-top: 10px; font-size: 11px; }
+  .print-note { font-size: 10px; margin-top: 14px; }
 }

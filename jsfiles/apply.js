@@ -138,12 +138,20 @@ form.addEventListener('submit', async (e) => {
     const fileFields = ['birthCertificate', 'lastSchoolResult', 'passportPhoto'];
     const files = {};
     let totalBytes = 0;
+    let passportPreviewUrl = null;
 
     for (const fieldName of fileFields) {
       const rawFile = form.querySelector(`[name="${fieldName}"]`).files[0];
       if (!rawFile) throw new Error(`Missing required file: ${fieldName}`);
 
       const processedFile = await compressImageFile(rawFile);
+
+      if (fieldName === 'passportPhoto') {
+        // Shown on the printable confirmation — this is a local preview
+        // straight from the browser, no server round-trip needed for it.
+        passportPreviewUrl = URL.createObjectURL(processedFile);
+      }
+
       const contentBase64 = await fileToBase64(processedFile);
       totalBytes += contentBase64.length;
 
@@ -217,7 +225,7 @@ form.addEventListener('submit', async (e) => {
       passkey: null,
     });
 
-    renderConfirmation(fields, applicationRef);
+    renderConfirmation(fields, applicationRef, passportPreviewUrl);
   } catch (err) {
     console.error(err);
     showError(err.message || 'Something went wrong. Please try again.');
@@ -244,8 +252,12 @@ function row2(table, label1, value1, label2, value2) {
   table.appendChild(tr);
 }
 
-function renderConfirmation(fields, applicationRef) {
+function renderConfirmation(fields, applicationRef, passportPreviewUrl) {
   document.getElementById('printRef').textContent = applicationRef;
+
+  if (passportPreviewUrl) {
+    document.getElementById('printPassportPhoto').src = passportPreviewUrl;
+  }
 
   const studentTable = document.getElementById('printStudentTable');
   row2(studentTable, 'Student Full Name', fields.studentFullName, 'Sex', fields.sex);
