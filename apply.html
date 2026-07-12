@@ -112,10 +112,6 @@
           <input type="tel" name="fatherPhone" required>
         </div>
         <div class="field">
-          <label>E-mail</label>
-          <input type="email" name="fatherEmail">
-        </div>
-        <div class="field">
           <label>Mother's Full Name</label>
           <input type="text" name="motherFullName">
         </div>
@@ -128,8 +124,8 @@
           <input type="tel" name="motherPhone">
         </div>
         <div class="field">
-          <label>E-mail *</label>
-          <input type="email" name="motherEmail" required>
+          <label>Parent/Guardian E-mail *</label>
+          <input type="email" name="guardianEmail" required>
           <span class="hint">We'll send the admission and exam details to this email.</span>
         </div>
       </div>
@@ -144,13 +140,9 @@
           <label>Last School Result *</label>
           <input type="file" name="lastSchoolResult" accept="image/*,.pdf" required>
         </div>
-        <div class="field">
-          <label>Passport Photograph 1 *</label>
-          <input type="file" name="passportPhoto1" accept="image/*" required>
-        </div>
-        <div class="field">
-          <label>Passport Photograph 2 *</label>
-          <input type="file" name="passportPhoto2" accept="image/*" required>
+        <div class="field field-wide">
+          <label>Passport Photograph *</label>
+          <input type="file" name="passportPhoto" accept="image/*" required>
         </div>
       </div>
 
@@ -180,9 +172,9 @@
       <h2>Next step: Confirm your admission by bank transfer</h2>
       <p>Transfer the admission processing fee to the account below, using your <strong>Application Reference Number</strong> as the transfer description/narration so we can match it to your application.</p>
       <ul>
-        <li><strong>Bank Name:</strong> <span id="bankName">[Add bank name]</span></li>
+        <li><strong>Bank Name:</strong> <span id="bankName">LOTUS BANK</span></li>
         <li><strong>Account Name:</strong> <span id="bankAccountName">CrestHive International School</span></li>
-        <li><strong>Account Number:</strong> <span id="bankAccountNumber">[Add account number]</span></li>
+        <li><strong>Account Number:</strong> <span id="bankAccountNumber"></span></li>
       </ul>
       <p>Once your payment is confirmed, your Exam Number and Passkey will be emailed to the parent/guardian email address you provided, and will also be available on our <a href="check-status.html">Check Application Status</a> page using your Application Reference Number.</p>
     </div>

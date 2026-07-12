@@ -160,11 +160,10 @@ async function buildAdmissionPdf(applicationRef, fields) {
   drawField("Father's Full Name", fields.fatherFullName);
   drawField('Occupation', fields.fatherOccupation);
   drawField('Telephone', fields.fatherPhone);
-  drawField('E-mail', fields.fatherEmail);
   drawField("Mother's Full Name", fields.motherFullName);
   drawField('Occupation', fields.motherOccupation);
   drawField('Telephone', fields.motherPhone);
-  drawField('E-mail', fields.motherEmail);
+  drawField('Parent/Guardian E-mail', fields.guardianEmail);
 
   drawSectionHeader('AFFIRMATION');
   drawField('', `I, ${fields.affirmationName}, hereby affirm that information provided here is accurate and can be relied upon.`);

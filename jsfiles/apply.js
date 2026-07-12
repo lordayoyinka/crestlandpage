@@ -135,7 +135,7 @@ form.addEventListener('submit', async (e) => {
       if (!(value instanceof File)) fields[key] = value;
     }
 
-    const fileFields = ['birthCertificate', 'lastSchoolResult', 'passportPhoto1', 'passportPhoto2'];
+    const fileFields = ['birthCertificate', 'lastSchoolResult', 'passportPhoto'];
     const files = {};
     let totalBytes = 0;
 
@@ -201,14 +201,13 @@ form.addEventListener('submit', async (e) => {
         fullName: fields.fatherFullName,
         occupation: fields.fatherOccupation || '',
         phone: fields.fatherPhone,
-        email: fields.fatherEmail || '',
       },
       mother: {
         fullName: fields.motherFullName || '',
         occupation: fields.motherOccupation || '',
         phone: fields.motherPhone || '',
-        email: fields.motherEmail,
       },
+      contactEmail: fields.guardianEmail,
       affirmation: {
         name: fields.affirmationName,
         date: new Date().toISOString().slice(0, 10),
@@ -260,7 +259,7 @@ function renderConfirmation(fields, applicationRef) {
   row2(parentTable, "Father's Full Name", fields.fatherFullName, "Mother's Full Name", fields.motherFullName);
   row2(parentTable, 'Occupation', fields.fatherOccupation, 'Occupation', fields.motherOccupation);
   row2(parentTable, 'Telephone', fields.fatherPhone, 'Telephone', fields.motherPhone);
-  row2(parentTable, 'E-mail', fields.fatherEmail, 'E-mail', fields.motherEmail);
+  row2(parentTable, 'Parent/Guardian E-mail', fields.guardianEmail, '', '');
 
   document.getElementById('printAffirmation').textContent =
     `I, ${fields.affirmationName}, hereby affirm that information provided here is accurate and can be relied upon.`;
