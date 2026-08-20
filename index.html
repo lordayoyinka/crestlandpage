@@ -4,111 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cresthive International School</title>
+    <title>Cresthive International School | Faith, Character &amp; Excellence</title>
+    <meta name="description" content="Cresthive International School (CrestHive) — nurturing curious minds from Early Life through SSS3. We imbibe knowledge without compromising the Deen.">
     <link rel="icon" href="./favicon.ico" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Joti+One&display=swap">
+
+    <!-- Preconnects for speed -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="/CSS/style.css">
-
-
-
-
-
-
-
-
-    <style>
-        /* Your existing styles for blog cards go here */
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-
-        .modal-content {
-            background-color: #fff;
-            padding: 20px;
-            min-width: 60%;
-            border-radius: 10px;
-            max-width: 80%;
-            max-height: 80%;
-            overflow-y: auto;
-        }
-
-       .modal-image {
-    display: block;
-    width: 100%;
-    max-width: 900px;
-    height: auto;
-    max-height: 80vh;
-    margin: 0 auto 20px auto;
-    object-fit: contain;
-    border-radius: 10px;
-    background: #f2f2f2;
-}
-
-        .modal-title {
-            font-size: 20px;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        .modal-content-text {
-            font-size: 16px;
-            line-height: 1.6;
-            margin-top: 10px;
-        }
-
-        .modal-columns {
-            display: flex;
-            gap: 12px;
-            margin-top: 16px;
-        }
-
-        .modal-column-image {
-            flex: 1;
-            height: 180px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-color: #f2f2f2;
-            border-radius: 8px;
-            display: none; /* shown via JS only when a URL is provided */
-        }
-
-        .close-modal {
-            font-size: 24px;
-            width: 80px;
-            height: 80px;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            color: red;
-            z-index: 9999999999999;
-            border-radius: 9999px;
-        }
-    </style>
-
-
-
-
-
-
-
-
-
-
-
-
 </head>
 
 <body>
@@ -117,34 +24,44 @@
     <script type="module" src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js"></script>
 
     <!-- Your main script file with type="module" -->
-    <script type="module" src="./jsfiles/script.js">
-
-
-    </script>
+    <script type="module" src="./jsfiles/script.js"></script>
 
     <!-- Firebase configuration and initialization -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js';
         import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js';
-
         // Your Firebase configuration and initialization code can go here
-
     </script>
 
+    <!-- ============ TOP UTILITY BAR ============ -->
+    <div class="topbar">
+        <div class="container topbar__container">
+            <div class="topbar__contact">
+                <span><i class="fas fa-envelope"></i> <span id="email-top"></span></span>
+                <span><i class="fas fa-phone"></i> <span id="phone-top"></span></span>
+            </div>
+            <div class="topbar__social">
+                <a href="#" id="linkedintop" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" id="twittertop" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" id="instagramtop" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" id="facebooktop" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </div>
 
-    <nav class="navbar">
+    <!-- ============ MAIN NAV ============ -->
+    <nav class="navbar" id="navbar">
         <div class="container nav__container">
-            <a href="index.html" class="school-name" style="display: flex; align-items: center;">
-                <img src="assets/logo.png"
-                    style="width: 36px; height: 36px; border-radius: 999px; margin-right: 6px;" />
-                <h4>Crest<span style="color: rgba(255, 187, 0, 1);">Hive</span></h4>
+            <a href="index.html" class="school-name">
+                <img src="assets/logo.png" alt="CrestHive logo" class="brand-logo" width="42" height="42">
+                <h4>Crest<span class="brand-accent">Hive</span></h4>
             </a>
+
             <ul class="nav__menu">
                 <li class="school-dropdown">
                     <a href="#school">School <i class="fas fa-caret-down"></i></a>
                     <ul class="school-submenu">
-                        <li><a href="pre-basic.html"> Crest Nursery and Primary School</a></li>
-
+                        <li><a href="pre-basic.html">Crest Nursery and Primary School</a></li>
                         <li><a href="college-extra.html">Cresthive International School</a></li>
                     </ul>
                 </li>
@@ -156,66 +73,41 @@
                         <li><a href="holidays.html">Holidays</a></li>
                         <li><a href="apply.html">Apply for Admission</a></li>
                         <li><a href="check-status.html">Check Application Status</a></li>
-
                     </ul>
                 </li>
                 <li><a href="about.html">About Us</a></li>
             </ul>
 
-            <div>
-                <a href="/login.html">
-                <button class="navbtn">
-
-                    Log In
-
-
-                </button>
-                </a>
-
-                <a href="apply.html">
-                <button class="navbtn">
-                    Apply Now
-                </button>
-                </a>
-
-                <a href="https://student.crestscholars.com/RegistrationPage">
-                <button class="navbtn">
-                  Start
-                        Registration
-                    
-
-                </button>
-            </a>
+            <div class="nav__cta">
+                <a href="/login.html"><button class="navbtn navbtn--ghost">Log In</button></a>
+                <a href="apply.html"><button class="navbtn navbtn--ghost">Apply Now</button></a>
+                <a href="https://student.crestscholars.com/RegistrationPage"><button class="navbtn navbtn--solid">Start Registration</button></a>
             </div>
 
+            <div class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
-    <div class="nav-toggle" id="nav-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-
-    <!-- Your navigation menu goes here -->
-    <nav class="nav-menu">
+    <!-- ============ MOBILE NAV ============ -->
+    <nav class="nav-menu" id="nav-menu">
         <nav class="navi">
             <div class="container nav__container">
                 <a href="index.html" class="school-name">
-                    <img src="assets/logo.png"
-                        style="width: 36px; height: 36px; border-radius: 999px; margin-right: 6px;" />
-                    <h4>Crest<span style="color: rgba(255, 187, 0, 1);">Hive</span></h4>
+                    <img src="assets/logo.png" alt="CrestHive logo" class="brand-logo" width="36" height="36">
+                    <h4>Crest<span class="brand-accent">Hive</span></h4>
                 </a>
                 <ul class="nav__menu">
                     <li class="school-dropdown">
                         <a href="#school">School <i class="fas fa-caret-down"></i></a>
                         <ul class="school-submenu">
-                            <li><a href="pre-basic.html"> Crest Nursery and Primary School</a></li>
-
+                            <li><a href="pre-basic.html">Crest Nursery and Primary School</a></li>
                             <li><a href="college-extra.html">Cresthive International School</a></li>
                         </ul>
                     </li>
-
                     <li class="school-dropdown">
                         <a href="#school">Admission <i class="fas fa-caret-down"></i></a>
                         <ul class="school-submenu">
@@ -224,205 +116,207 @@
                             <li><a href="holidays.html">Holidays</a></li>
                             <li><a href="apply.html">Apply for Admission</a></li>
                             <li><a href="check-status.html">Check Application Status</a></li>
-
                         </ul>
                     </li>
-
-                    <li><a href="admission.html">Admissions</a></li>
                     <li><a href="about.html">About Us</a></li>
                 </ul>
 
-                <a href="/login.html">
-                    <button class="navbtn2">Log In</button>
-                </a>
-
-                <a href="apply.html">
-                    <button class="navbtn2">Apply Now</button>
-                </a>
-
-                <a href="https://student.crestscholars.com/RegistrationPage">
-                    <button class="navbtn">Start Registration</button>
-                </a>
+                <a href="/login.html"><button class="navbtn2">Log In</button></a>
+                <a href="apply.html"><button class="navbtn2">Apply Now</button></a>
+                <a href="https://student.crestscholars.com/RegistrationPage"><button class="navbtn">Start Registration</button></a>
             </div>
         </nav>
     </nav>
 
-
-
-
+    <!-- ============ HERO ============ -->
     <section class="hero">
-
-        <div class="hero-contaianer" style="position: absolute; z-index: 99; width: 100%;">
-            <h1 id="herotitle"></h1>
-            <p id="herosub"></p>
-            <a href="https://student.crestscholars.com/RegistrationPage"><button> Start registration</button></a>
-        </div>
-
-        <div id="slider" style="z-index: 1; position: absolute;">
+        <div id="slider" class="hero__slider">
             <figure>
-                <img src=" assets/Rectangle%20477.jpg" alt>
-                <img src="assets/Rectangle%205.jpg" alt>
-                <img src="assets/Property%201=Variant3.jpg" alt>
-                <img src="assets/06.jpg" alt>
+                <img src="assets/Rectangle%20477.jpg" alt="" loading="eager">
+                <img src="assets/Rectangle%205.jpg" alt="" loading="eager">
+                <img src="assets/Property%201=Variant3.jpg" alt="" loading="lazy">
+                <img src="assets/06.jpg" alt="" loading="lazy">
             </figure>
+            <div class="hero__scrim"></div>
+            <div class="hero__hex" aria-hidden="true"></div>
         </div>
 
+        <div class="hero-contaianer">
+            <p class="hero__eyebrow">Cresthive International School</p>
+            <h1 id="herotitle">Where Character Grows<br>Alongside Knowledge</h1>
+            <p id="herosub">A warm, faith-centred home for learners from Early Life to Senior Secondary — we imbibe knowledge without compromising the Deen.</p>
+            <div class="hero__actions">
+                <a href="https://student.crestscholars.com/RegistrationPage"><button class="btn btn--gold">Start Registration <i class="fas fa-arrow-right"></i></button></a>
+                <a href="apply.html"><button class="btn btn--outline-light">Apply for Admission</button></a>
+            </div>
+        </div>
+
+        <a href="#values" class="hero__scrolldown" aria-label="Scroll to explore">
+            <span></span>
+        </a>
     </section>
 
+    <!-- ============ VALUES STRIP ============ -->
+    <section class="values" id="values">
+        <div class="container values__grid">
+            <div class="value">
+                <i class="fas fa-mosque"></i>
+                <h3>Faith-Centred Learning</h3>
+                <p>Sound Islamic values woven gently into everyday school life.</p>
+            </div>
+            <div class="value">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h3>Dedicated Educators</h3>
+                <p>Experienced teachers who know every child by name.</p>
+            </div>
+            <div class="value">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Safe, Caring Campus</h3>
+                <p>A secure environment where children are free to be curious.</p>
+            </div>
+            <div class="value">
+                <i class="fas fa-seedling"></i>
+                <h3>Whole-Child Growth</h3>
+                <p>Academics, character and confidence, nurtured together.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ SECTION 2 ============ -->
     <section class="section2">
         <div class="s2-left">
-            <img src="/assets/Group 21335.png" class="s2-img">
+            <img src="/assets/Group%2021335.png" class="s2-img" alt="" loading="lazy">
         </div>
-
         <div class="s2-right">
-            <h2 id="sec1title"></h2>
-            <p id="sec1text"></p>
-            <a href="/about.html">
-                <button class="s2btn">Learn more</button>
-            </a>
+            <span class="eyebrow">Welcome to CrestHive</span>
+            <h2 id="sec1title">A School That Feels Like Family</h2>
+            <p id="sec1text">From the moment a child walks through our gates, they are known, valued and gently guided — because we believe learning grows best where a child feels safe, seen and loved.</p>
+            <a href="/about.html"><button class="s2btn">Learn more <i class="fas fa-arrow-right"></i></button></a>
         </div>
     </section>
 
+    <!-- ============ SECTION 3 ============ -->
     <section class="section3">
-
         <div class="s3-right">
-            <h2 id="sec2title"></h2>
-            <p id="sec2text"></p>
-
-
-            <a href="/about.html">
-                <button class="s2btn">Learn more</button>
-            </a>
+            <span class="eyebrow">Our Approach</span>
+            <h2 id="sec2title">Learning Rooted in Purpose</h2>
+            <p id="sec2text">Our curriculum blends rigorous academics with moral guidance, hands-on discovery and genuine care — preparing every pupil for the classroom, and for life.</p>
+            <a href="/about.html"><button class="s2btn">Learn more <i class="fas fa-arrow-right"></i></button></a>
         </div>
-
         <div class="s3-left">
-            <img src="/assets/Group 21337.png" class="s2-img">
+            <img src="/assets/Group%2021337.png" class="s2-img" alt="" loading="lazy">
         </div>
-
     </section>
 
+    <!-- ============ MISSION / VISION ============ -->
     <section class="section4">
-
+        <span class="eyebrow eyebrow--center">Our Compass</span>
+        <h2 class="section-title section-title--center">Mission &amp; Vision</h2>
 
         <div id="slidor" class="slidor">
-            <figure>
-                <div class="vm" style="background-color: rgb(187, 81, 6);">
-                    <h2>Our Mission</h2>
-                    <div class="tsc">
-                        <div class="divo">“</div>
-                        <div id="missionText" class="supporting-text2">
-                            <!-- Add your mission text here -->
-                        </div>
-                        <div class="divo1">“</div>
-                    </div>
+            <div class="vm vm--mission">
+                <i class="fas fa-compass vm__icon"></i>
+                <h3>Our Mission</h3>
+                <div class="tsc">
+                    <span class="quote-mark">&ldquo;</span>
+                    <div id="missionText" class="supporting-text2">To raise disciplined, knowledgeable and God-conscious learners equipped to excel academically and lead with integrity.</div>
+                    <span class="quote-mark quote-mark--close">&rdquo;</span>
                 </div>
+            </div>
 
-                <div class="vm" style="background-color: rgb(7, 53, 7);">
-                    <h2>Our Vision</h2>
-                    <div class="tsc">
-                        <div class="divo">“</div>
-                        <div id="visionText" class="supporting-text2">
-                            <!-- Add your vision text here -->
-                        </div>
-                        <div class="divo1">“</div>
-                    </div>
+            <div class="vm vm--vision">
+                <i class="fas fa-eye vm__icon"></i>
+                <h3>Our Vision</h3>
+                <div class="tsc">
+                    <span class="quote-mark">&ldquo;</span>
+                    <div id="visionText" class="supporting-text2">To be a leading school where sound education and strong values shape confident, compassionate global citizens.</div>
+                    <span class="quote-mark quote-mark--close">&rdquo;</span>
                 </div>
-            </figure>
+            </div>
         </div>
-        <!-- <div class="tsc2">
-            <h2>Fostering Growth Together</h2>
-            <p>We work closely with each family to gently guide each child, <br> building confidence and very good
-                social and <br>
-                entrepreneurial skills with sound religious and moral values.</p>
-        </div> -->
     </section>
 
+    <!-- ============ ACADEMIC PATHWAY (hex honeycomb) ============ -->
     <section class="section5">
-
         <div class="s5-cta">
-            <h2 id="sec3title"></h2>
-            <h4 id="sec3subtitle"></h4>
-            <p id="sec3text">
-            </p>
-            <a href="/admission-process.html">
-                <button class="s5btn">Learn More</button>
-            </a>
+            <span class="eyebrow">The CrestHive Journey</span>
+            <h2 id="sec3title">One School, Every Stage</h2>
+            <h4 id="sec3subtitle">From first steps to final exams</h4>
+            <p id="sec3text">A single, connected pathway of learning — so every child moves forward with confidence, at every age and stage.</p>
+            <a href="/admission-process.html"><button class="s5btn">Learn More <i class="fas fa-arrow-right"></i></button></a>
         </div>
 
-        <div class="s5polygon">
-            <div class="firstline">
-                <div class="image-container">
-                    <img src="/assets/Polygon 19 (1).png">
+        <div class="s5polygon hex-grid">
+            <div class="hex-row">
+                <div class="image-container hex">
+                    <img src="/assets/Polygon%2019%20(1).png" alt="" loading="lazy">
                     <div class="overlay">
                         <div class="overlay-contents">
-                            <h2>Early Life (Age 2)</h2>
-                            <p>Nurturing curiosity and foundational social
-                                skills.</p>
+                            <span class="hex__num">01</span>
+                            <h2>Early Life</h2>
+                            <p>Age 2 — Nurturing curiosity and foundational social skills.</p>
                         </div>
                     </div>
                 </div>
-                <div class="image-container">
-                    <img src="/assets/Polygon 20.png">
+                <div class="image-container hex">
+                    <img src="/assets/Polygon%2020.png" alt="" loading="lazy">
                     <div class="overlay">
                         <div class="overlay-contents">
-                            <h2>Play Group (Age 2-3)</h2>
-                            <p>Fostering earl learning through play and
-                                interaction.</p>
+                            <span class="hex__num">02</span>
+                            <h2>Play Group</h2>
+                            <p>Age 2–3 — Fostering early learning through play and interaction.</p>
                         </div>
                     </div>
                 </div>
-                <div class="image-container">
-                    <img src="/assets/Polygon 21.png">
+                <div class="image-container hex">
+                    <img src="/assets/Polygon%2021.png" alt="" loading="lazy">
                     <div class="overlay">
                         <div class="overlay-contents">
+                            <span class="hex__num">03</span>
                             <h2>Pre-Nursery</h2>
-                            <p>Preparing for structured learning and social
-                                development.</p>
+                            <p>Preparing for structured learning and social development.</p>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="secondline">
-                <div class="image-container">
-                    <img src="/assets/Polygon 22.png">
+                <div class="image-container hex">
+                    <img src="/assets/Polygon%2022.png" alt="" loading="lazy">
                     <div class="overlay">
                         <div class="overlay-contents">
+                            <span class="hex__num">04</span>
                             <h2>Nursery</h2>
-                            <p>Building a strong educational foundation with
-                                fun activities</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="image-container">
-                    <img src="/assets/Polygon 18 (4).png">
-                    <div class="overlay">
-                        <div class="overlay-contents">
-                            <h2>Basic 1-5</h2>
-                            <p>progressive learning from basic one to basic
-                                five.</p>
+                            <p>Building a strong educational foundation with fun activities.</p>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="thirdline">
-                <div class="image-container">
-                    <img src="/assets/Polygon 24.png">
+            <div class="hex-row hex-row--offset">
+                <div class="image-container hex">
+                    <img src="/assets/Polygon%2018%20(4).png" alt="" loading="lazy">
                     <div class="overlay">
                         <div class="overlay-contents">
-                            <h2>JSS 1-3</h2>
-                            <p>Exploring Diverse subject and skills</p>
+                            <span class="hex__num">05</span>
+                            <h2>Basic 1–5</h2>
+                            <p>Progressive learning from Basic One to Basic Five.</p>
                         </div>
                     </div>
                 </div>
-                <div class="image-container">
-                    <img src="/assets/Polygon 18 (6).png">
+                <div class="image-container hex">
+                    <img src="/assets/Polygon%2024.png" alt="" loading="lazy">
                     <div class="overlay">
                         <div class="overlay-contents">
-                            <h2>SSS 1-3</h2>
-                            <p>Preparing for higher education and the
-                                future.</p>
+                            <span class="hex__num">06</span>
+                            <h2>JSS 1–3</h2>
+                            <p>Exploring diverse subjects and skills.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-container hex">
+                    <img src="/assets/Polygon%2018%20(6).png" alt="" loading="lazy">
+                    <div class="overlay">
+                        <div class="overlay-contents">
+                            <span class="hex__num">07</span>
+                            <h2>SSS 1–3</h2>
+                            <p>Preparing for higher education and the future.</p>
                         </div>
                     </div>
                 </div>
@@ -430,47 +324,32 @@
         </div>
     </section>
 
+    <!-- ============ NEWS ============ -->
     <section class="section6">
-
         <div class="s6left">
             <div class="s6left-container">
-                <h2>Our <br> <span class="highlight">NEWS</span> updates
-                </h2>
+                <span class="eyebrow">Stay Informed</span>
+                <h2>Our <br><span class="highlight">News</span> Updates</h2>
                 <div class="bicon">
-                    <div class="next-icon" id="nextButton">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="36.64" height="67.636" fill-rule="evenodd"
-                            clip-rule="evenodd" image-rendering="optimizeQuality" shape-rendering="geometricPrecision"
-                            text-rendering="geometricPrecision" viewBox="0 0 958.62 1769.59" id="forward">
-                            <path fill-rule="nonzero"
-                                d="M21.62 126.04c-28.83,-28.83 -28.83,-75.58 0,-104.4 28.83,-28.83 75.58,-28.83 104.4,0l810.98 810.97c28.83,28.83 28.83,75.57 0,104.39l-810.98 810.96c-28.83,28.83 -75.57,28.83 -104.4,0 -28.83,-28.83 -28.83,-75.57 0,-104.39l758.78 -758.77 -758.78 -758.76z">
-                            </path>
-                        </svg>
-                    </div>
-                    <div class="next-icon1" id="prevButton">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="36.64" height="67.636" fill-rule="evenodd"
-                            clip-rule="evenodd" image-rendering="optimizeQuality" shape-rendering="geometricPrecision"
-                            text-rendering="geometricPrecision" viewBox="0 0 958.62 1769.59" id="forward">
-                            <path fill-rule="nonzero"
-                                d="M21.62 126.04c-28.83,-28.83 -28.83,-75.58 0,-104.4 28.83,-28.83 75.58,-28.83 104.4,0l810.98 810.97c28.83,28.83 28.83,75.57 0,104.39l-810.98 810.96c-28.83,28.83 -75.57,28.83 -104.4,0 -28.83,-28.83 -28.83,-75.57 0,-104.39l758.78 -758.77 -758.78 -758.76z">
-                            </path>
-                        </svg>
-                    </div>
+                    <button class="next-icon1" id="prevButton" aria-label="Previous">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <button class="next-icon" id="nextButton" aria-label="Next">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
                 </div>
             </div>
         </div>
 
         <div class="s6right">
-
-            <div class="blog-card-container">
-
-            </div>
+            <div class="blog-card-container"></div>
+        </div>
     </section>
 
-
-    <div class="modal" id="myModal" onclick="closeModal()">
-        <div class="modal-content" onclick="closeModal()">
-            <div class="close-modal" onclick="closeModal()">&times;</div>
-        <img class="modal-image" id="modalImage" alt="Blog Image">
+    <div class="modal" id="myModal">
+        <div class="modal-content">
+            <div class="close-modal" id="closeModalBtn">&times;</div>
+            <img class="modal-image" id="modalImage" alt="Blog Image">
             <div class="modal-title" id="modalTitle"></div>
             <div class="modal-content-text" id="modalContentText"></div>
             <div class="modal-columns">
@@ -480,108 +359,71 @@
         </div>
     </div>
 
-    <script>
-        const mode = document.getElementById("myModal");
-        mode.addEventListener("click", () => {
-            mode.style.display = "none"
-        })
-    </script>
-
-
-
-
-
+    <!-- ============ STAFF ============ -->
     <section class="section7">
+        <span class="eyebrow eyebrow--center">Our People</span>
         <h2>Meet Our Staff</h2>
-        <div class="staff-cards-container">
-
-        </div>
+        <div class="staff-cards-container"></div>
     </section>
 
-
-    <script>
-
-    document.addEventListener('DOMContentLoaded', function () {
-            const container = document.querySelector('.staff-cards-container');
-            const scrollAmount = 1;
-            const scrollSpeed = 2;
-
-
-            
-            function autoScroll() {
-                container.scrollLeft += scrollAmount * scrollSpeed;
-                if (container.scrollLeft >= container.scrollWidth - container.clientWidth) {
-                    container.scrollLeft = 0;
-                }
-                requestAnimationFrame(autoScroll);
-            }
-
-            // Start auto-scrolling when the page loads
-            autoScroll();
-        });
-
-
-
-
-    </script>
-    <!----------------- footer ----------------->
-
+    <!-- ============ FOOTER CTA ============ -->
     <footer class="footer">
         <div class="footer-content">
-            <h2 class="footer-header">
-                <span class="fasthand-font">CrestHive</span> surpasses
-                just a school,
-            </h2>
-            <h2 class="footer-header footer-header-fasthand"> we
-                are family.</h2>
-            <p class="footer-text">We imbibe knowledge without
-                compromising the Deen</p>
-            <p class="footer-text"></p>
-            <a href="/about.html">
-                <button class="footer-button">Learn More</button>
-            </a>
+            <h2 class="footer-header">CrestHive surpasses just a school,<br><span class="footer-header-fasthand">we are family.</span></h2>
+            <p class="footer-text">We imbibe knowledge without compromising the Deen.</p>
+            <a href="/about.html"><button class="footer-button">Learn More</button></a>
         </div>
 
         <div class="footer-content2">
-            <div class="footer-content2">
-                <div class="contact-info">
-                    <h2>Contact Us</h2>
-                    <hr>
-                    <p><i class="fas fa-envelope"></i> Email:
-                       <span id="email">
-
-                       </span>
-                    </p>
-                    <hr>
-                   <p><i class="fas fa-phone"></i> Phone number:
-                        <span id="phone">
-
-                        </span>
-                    </p>
+            <div class="footer-columns">
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="admission-process.html">Admissions</a></li>
+                        <li><a href="apply.html">Apply Now</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="holidays.html">Holidays</a></li>
+                    </ul>
                 </div>
-                <div class="copyright">
-                  <p>© <span id="copyright-year"></span> Cresthive International School. All rights reserved  </p>
-                 
+
+                <div class="footer-col">
+                    <h3>Our Schools</h3>
+                    <ul>
+                        <li><a href="pre-basic.html">Crest Nursery &amp; Primary</a></li>
+                        <li><a href="college-extra.html">Cresthive International</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col contact-info">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> <span id="email"></span></p>
+                    <p><i class="fas fa-phone"></i> <span id="phone"></span></p>
                     <div class="social-icons">
-                        <a href="#" id="linkedinfooter"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" id="twitterfooter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" id="instagramfooter"><i class="fab fa-instagram"></i></a>
-                        <a href="#" id="facebookfooter"><i class="fab fa-facebook"></i></a>
+                        <a href="#" id="linkedinfooter" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" id="twitterfooter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" id="instagramfooter" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" id="facebookfooter" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                     </div>
                 </div>
             </div>
 
+            <div class="copyright">
+                <p>&copy; <span id="copyright-year"></span> Cresthive International School. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
     <div class="floating-icon">
         <a href="gallery.html">
-            <div class="icon-bg">
-                <i class="fas fa-image"></i> Gallery
-            </div>
+            <div class="icon-bg"><i class="fas fa-image"></i> Gallery</div>
         </a>
     </div>
-<script src="jsfiles/footer.js"></script>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="jsfiles/footer.js"></script>
+    <script src="jsfiles/enhance.js"></script>
 </body>
 
 </html>
