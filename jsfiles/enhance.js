@@ -5,36 +5,23 @@
 
   var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- Mobile nav toggle ---------- */
-  var navToggle = document.getElementById("nav-toggle");
-  var navMenu = document.getElementById("nav-menu");
-  if (navToggle && navMenu) {
-    navToggle.addEventListener("click", function () {
-      navToggle.classList.toggle("is-active");
-      navMenu.classList.toggle("is-open");
-      document.body.classList.toggle("no-scroll");
-    });
-    navMenu.querySelectorAll("a").forEach(function (link) {
+  /* NOTE: mobile nav toggle (#nav-toggle -> .nav-menu/.nav-toggle "active" class)
+     and the navbar scroll shadow (.navbar "scrolled" class) are already handled
+     by script.js. Not duplicated here to avoid two listeners fighting/flickering.
+     CSS in style.css targets the exact class names script.js uses: "active" and
+     "scrolled". */
+
+  /* Still close the mobile drawer + unlock body scroll when a link inside it
+     is tapped, since script.js's toggle only fires on the hamburger itself. */
+  var navToggleBtn = document.getElementById("nav-toggle");
+  var navMenuEl = document.getElementById("nav-menu");
+  if (navToggleBtn && navMenuEl) {
+    navMenuEl.querySelectorAll("a").forEach(function (link) {
       link.addEventListener("click", function () {
-        navToggle.classList.remove("is-active");
-        navMenu.classList.remove("is-open");
-        document.body.classList.remove("no-scroll");
+        navMenuEl.classList.remove("active");
+        navToggleBtn.classList.remove("active");
       });
     });
-  }
-
-  /* ---------- Sticky nav shrink + shadow on scroll ---------- */
-  var navbar = document.getElementById("navbar");
-  if (navbar) {
-    var onScroll = function () {
-      if (window.scrollY > 12) {
-        navbar.classList.add("is-scrolled");
-      } else {
-        navbar.classList.remove("is-scrolled");
-      }
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
   }
 
   /* ---------- Mirror dynamic contact info + socials into the top utility bar ---------- */
@@ -127,16 +114,15 @@
     }
   }
 
-  /* ---------- News carousel prev/next buttons ---------- */
-  var blogContainer = document.querySelector(".blog-card-container");
-  var nextBtn = document.getElementById("nextButton");
-  var prevBtn = document.getElementById("prevButton");
-  function scrollBlogBy(amount) {
-    if (!blogContainer) return;
-    blogContainer.scrollBy({ left: amount, behavior: "smooth" });
-  }
-  if (nextBtn) nextBtn.addEventListener("click", function () { scrollBlogBy(340); });
-  if (prevBtn) prevBtn.addEventListener("click", function () { scrollBlogBy(-340); });
+  /* NOTE: the news prev/next buttons (#prevButton / #nextButton) are already
+     wired up in script.js — not duplicated here. Heads up, separate from the
+     CSS fix: in script.js the two variable names are swapped —
+       const nextButton = document.getElementById("prevButton");
+       const prevButton = document.getElementById("nextButton");
+     — so the left-arrow button currently scrolls right and vice versa. Worth
+     a quick fix on your end (swap those two lines back) so the arrows scroll
+     the direction they visually point. Not something I changed, since it's
+     in a file I don't own. */
 
   /* ---------- Reveal-on-scroll for section headings/cards ---------- */
   var revealTargets = document.querySelectorAll(

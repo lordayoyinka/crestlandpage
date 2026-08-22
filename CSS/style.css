@@ -169,7 +169,7 @@ p { margin: 0 0 1em; color: var(--ink-700); }
   border-bottom: 1px solid var(--line-soft);
   transition: box-shadow .3s var(--ease), padding .3s var(--ease);
 }
-.navbar.is-scrolled { box-shadow: var(--shadow-sm); }
+.navbar.scrolled { box-shadow: var(--shadow-sm); }
 .nav__container {
   display: flex; align-items: center; justify-content: space-between;
   padding: 14px 24px; gap: 24px;
@@ -213,9 +213,9 @@ p { margin: 0 0 1em; color: var(--ink-700); }
   display: none; flex-direction: column; gap: 5px; width: 26px; cursor: pointer; z-index: 600;
 }
 .nav-toggle span { width: 100%; height: 2.5px; background: var(--green-950); border-radius: 2px; transition: transform .3s var(--ease), opacity .3s var(--ease); }
-.nav-toggle.is-active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
-.nav-toggle.is-active span:nth-child(2) { opacity: 0; }
-.nav-toggle.is-active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+.nav-toggle.active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.nav-toggle.active span:nth-child(2) { opacity: 0; }
+.nav-toggle.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
 .nav-menu {
   position: fixed; inset: 0; z-index: 550;
@@ -224,7 +224,7 @@ p { margin: 0 0 1em; color: var(--ink-700); }
   overflow-y: auto;
   display: none;
 }
-.nav-menu.is-open { transform: translateX(0); display: block; }
+.nav-menu.active { transform: translateX(0); display: block; }
 .nav-menu .navi { padding: 90px 8px 40px; }
 .nav-menu .nav__container { flex-direction: column; align-items: flex-start; gap: 28px; }
 .nav-menu .school-name h4 { color: #fff; }
@@ -463,7 +463,46 @@ p { margin: 0 0 1em; color: var(--ink-700); }
   content: "News will appear here shortly.";
   color: var(--ink-500); font-size: .95rem; padding: 40px 0;
 }
-.blog-card-container > * { scroll-snap-align: start; }
+
+/* Matches the exact markup script.js builds for each testimonial:
+   <div class="blog-card">
+     <img class="blog-card-image">
+     <p class="blog-card-title">...</p>
+     <div class="blog-card-paragraph"><p>full text</p></div>
+     <p>Read More...</p>
+   </div>
+   The full text is intentionally clamped here — clicking the card opens
+   the complete text in the modal via the existing openModal() call. */
+.blog-card {
+  scroll-snap-align: start;
+  flex: 0 0 320px;
+  width: 320px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.blog-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.blog-card-image { width: 100%; height: 180px; object-fit: cover; display: block; background: var(--cream-100); }
+.blog-card-title {
+  font-family: var(--font-display); font-weight: 600; font-size: 1.05rem;
+  color: var(--green-950); padding: 18px 20px 0; margin: 0 0 .3em; line-height: 1.3;
+}
+.blog-card-paragraph { padding: 0 20px; flex: 1; }
+.blog-card-paragraph p {
+  margin: 0; font-size: .9rem; color: var(--ink-700); line-height: 1.55;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+/* the trailing "Read More..." <p>, appended directly as the card's last child */
+.blog-card > p:last-child {
+  margin: 0; padding: 10px 20px 20px; font-size: .82rem; font-weight: 700;
+  letter-spacing: .02em; color: var(--rust-600);
+}
 
 @media (max-width: 860px) {
   .section6 { flex-direction: column; padding: 64px 20px; }
@@ -514,6 +553,15 @@ p { margin: 0 0 1em; color: var(--ink-700); }
   content: "Meet the team — coming soon.";
   color: var(--ink-500); font-size: .95rem; padding: 20px 0; width: 100%;
 }
+
+/* Matches script.js's staff card markup: <div class="staff-card"><img><h3><p></div> */
+.staff-card { flex: 0 0 170px; width: 170px; text-align: center; }
+.staff-card img {
+  width: 120px; height: 120px; border-radius: 50%; object-fit: cover;
+  margin: 0 auto 14px; box-shadow: var(--shadow-sm);
+}
+.staff-card h3 { font-family: var(--font-display); font-size: 1rem; margin: 0 0 .3em; color: var(--green-950); }
+.staff-card p { font-size: .82rem; color: var(--ink-500); margin: 0; }
 
 /* =========================================================
    Footer
