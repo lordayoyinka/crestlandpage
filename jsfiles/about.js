@@ -69,6 +69,34 @@ fetchFirebaseConfigJson()
 
     console.log("fetch", fetch, "fetch2", fetch2)
 
+    // ---------- School Administration (4 fixed profiles, aboutPage doc) ----------
+    const administrators = fetch.administrators || [];
+    const adminsContainer = document.querySelector(".admins-cards-container");
+    if (adminsContainer) {
+      administrators.forEach((admin) => {
+        if (!admin || (!admin.adminName && !admin.adminPicture)) return;
+
+        const card = document.createElement("div");
+        card.className = "staff-card";
+
+        const img = document.createElement("img");
+        img.src = admin.adminPicture || "";
+        img.alt = admin.adminName || "";
+
+        const h3 = document.createElement("h3");
+        h3.textContent = admin.adminName || "";
+
+        const pRole = document.createElement("p");
+        pRole.textContent = admin.adminRole ? `Role: ${admin.adminRole}` : "";
+
+        card.appendChild(img);
+        card.appendChild(h3);
+        card.appendChild(pRole);
+
+        adminsContainer.appendChild(card);
+      });
+    }
+
     // ---------- Staff ----------
     const teachers = fetch2.teachers;
     const staffCardsContainer = document.querySelector(".staff-cards-container");
