@@ -42,62 +42,97 @@
             margin: 0;
         }
 
-        .sections-container {
-            display: flex;
-            overflow: hidden;
-            min-height: 74vh;
-            color: white;
+        .leaders {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 80px 24px 40px;
         }
-        .section2 {
-            min-width: 100vw;
-            min-height: 100%;
-            display: flex;
+        .leaders-head {
+            text-align: center;
+            max-width: 560px;
+            margin: 0 auto 56px;
         }
-        .s2left, .s2right {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .s2left img {
-            max-width: 100%;
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-        }
-        .s2right {
-            background: linear-gradient(135deg, #0e3a2c, #16603f);
-            padding: 48px;
-        }
-        .overlay-text {
-            max-width: 380px;
-        }
-        .overlay-text .eyebrow2 {
+        .leaders-head .eyebrow2 {
             display: inline-block;
             font-size: 12.5px;
             letter-spacing: 0.14em;
             text-transform: uppercase;
-            color: #eec97a;
+            color: #d79b2e;
             font-weight: 600;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
-        .overlay-text h2 {
+        .leaders-head h2 {
             font-family: 'Fraunces', serif;
             font-weight: 500;
-            font-size: 28px;
+            font-size: clamp(24px, 3vw, 32px);
+            color: #0e3a2c;
+            margin: 0;
+        }
+
+        .leader-card {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            background: #fff;
+            border: 1px solid #e4dbc4;
+            border-radius: 18px;
+            padding: 28px;
+            max-width: 640px;
+            margin-bottom: 36px;
+            box-shadow: 0 20px 40px -28px rgba(14, 58, 44, 0.3);
+        }
+        .leader-card.align-left {
+            margin-right: auto;
+        }
+        .leader-card.align-right {
+            margin-left: auto;
+            flex-direction: row-reverse;
+            text-align: right;
+        }
+        .leader-photo {
+            flex-shrink: 0;
+            width: 128px;
+            height: 128px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #f1ead9;
+        }
+        .leader-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .leader-info .eyebrow2 {
+            display: block;
+            font-size: 12px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #d79b2e;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .leader-info h2 {
+            font-family: 'Fraunces', serif;
+            font-weight: 500;
+            font-size: 21px;
+            color: #0e3a2c;
             margin: 0 0 10px;
-            color: #fff;
         }
-        .overlay-text .dir-role {
-            font-size: 14px;
-            color: #cfe3d7;
-            margin: 0 0 18px;
-        }
-        .overlay-text .dir-bio {
+        .leader-info p {
             font-size: 14.5px;
             line-height: 1.7;
-            color: #dcebe2;
+            color: #544f43;
             margin: 0;
+        }
+
+        @media (max-width: 640px) {
+            .leader-card,
+            .leader-card.align-right {
+                flex-direction: column;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
         }
 
         .about-mv {
@@ -188,8 +223,6 @@
 
         @media (max-width: 720px) {
             .about-hero { padding: 120px 20px 50px; }
-            .section2 { flex-direction: column; }
-            .s2left img { height: 260px; }
             .about-mv-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -302,49 +335,46 @@
         <p id="aboutSubtitle"></p>
     </section>
 
-    <!-- ============ DIRECTOR SPOTLIGHTS ============ -->
-    <div id="sections-container" class="sections-container">
+    <!-- ============ LEADERSHIP ============ -->
+    <section class="leaders">
+        <div class="leaders-head">
+            <span class="eyebrow2">Meet the leadership</span>
+            <h2>The people guiding CrestHive</h2>
+        </div>
 
-        <section class="section2">
-            <div class="s2left">
-                <img id="img1" src="/assets/logo.png" alt="College Director">
+        <div class="leader-card align-left">
+            <div class="leader-photo">
+                <img id="img1" src="/assets/logo.png" alt="School Director">
             </div>
-            <div class="s2right">
-                <div class="overlay-text">
-                    <span class="eyebrow2">College Director</span>
-                    <h2 id="dirName1"></h2>
-                    <p class="dir-bio" id="dirText1"></p>
-                </div>
+            <div class="leader-info">
+                <span class="eyebrow2">School Director</span>
+                <h2 id="dirName1"></h2>
+                <p id="dirText1"></p>
             </div>
-        </section>
+        </div>
 
-        <section class="section2">
-            <div class="s2left">
-                <img id="img2" src="/assets/logo.png" alt="School Director">
+        <div class="leader-card align-right">
+            <div class="leader-photo">
+                <img id="img2" src="/assets/logo.png" alt="Director">
             </div>
-            <div class="s2right">
-                <div class="overlay-text">
-                    <span class="eyebrow2">School Director</span>
-                    <h2 id="dirName2"></h2>
-                    <p class="dir-bio" id="dirText2"></p>
-                </div>
+            <div class="leader-info">
+                <span class="eyebrow2">Director</span>
+                <h2 id="dirName2"></h2>
+                <p id="dirText2"></p>
             </div>
-        </section>
+        </div>
 
-        <section class="section2">
-            <div class="s2left">
-                <img id="img3" src="/assets/dir.png" alt="Director">
+        <div class="leader-card align-right">
+            <div class="leader-photo">
+                <img id="img3" src="/assets/logo.png" alt="College Director">
             </div>
-            <div class="s2right">
-                <div class="overlay-text">
-                    <span class="eyebrow2">Director</span>
-                    <h2 id="dirName3"></h2>
-                    <p class="dir-bio" id="dirText3"></p>
-                </div>
+            <div class="leader-info">
+                <span class="eyebrow2">College Director</span>
+                <h2 id="dirName3"></h2>
+                <p id="dirText3"></p>
             </div>
-        </section>
-
-    </div>
+        </div>
+    </section>
 
     <!-- ============ MISSION / VISION ============ -->
     <section class="about-mv">

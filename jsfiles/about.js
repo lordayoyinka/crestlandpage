@@ -106,30 +106,33 @@ fetchFirebaseConfigJson()
     subtextElement.style.whiteSpace = 'pre-line';
 
     // ---------- Director spotlights ----------
+    // School Director
     const dir1TitleElement = document.getElementById("dirName1");
-    dir1TitleElement.innerHTML = `${(fetch.directcollegeTitle || "").replace(/\n/g, '<br/>')}`;
+    dir1TitleElement.innerHTML = `${(fetch.directbasicTitle || "").replace(/\n/g, '<br/>')}`;
     dir1TitleElement.style.whiteSpace = 'pre-line';
 
+    // Director (Nursery / Primary)
     const dir2TitleElement = document.getElementById("dirName2");
-    dir2TitleElement.innerHTML = `${(fetch.directbasicTitle || "").replace(/\n/g, '<br/>')}`;
+    dir2TitleElement.innerHTML = `${(fetch.directprebasicTitle || "").replace(/\n/g, '<br/>')}`;
     dir2TitleElement.style.whiteSpace = 'pre-line';
 
+    // College Director
     const dir3TitleElement = document.getElementById("dirName3");
-    dir3TitleElement.innerHTML = `${(fetch.directprebasicTitle || "").replace(/\n/g, '<br/>')}`;
+    dir3TitleElement.innerHTML = `${(fetch.directcollegeTitle || "").replace(/\n/g, '<br/>')}`;
     dir3TitleElement.style.whiteSpace = 'pre-line';
 
-    // Director bio text (present in the CMS, previously never rendered on the page at all)
-    const dir1TextElement = document.getElementById("dirText1");
+    // Director bio text (correct field mapping, confirmed against the CMS form)
+    const dir1TextElement = document.getElementById("dirText1"); // School Director
     if (dir1TextElement) {
-      dir1TextElement.innerHTML = `${(fetch.directcollegeText || "").replace(/\n/g, '<br/>')}`;
+      dir1TextElement.innerHTML = `${(fetch.directprebasicText || "").replace(/\n/g, '<br/>')}`;
     }
-    const dir2TextElement = document.getElementById("dirText2");
+    const dir2TextElement = document.getElementById("dirText2"); // Director (Nursery/Primary)
     if (dir2TextElement) {
-      dir2TextElement.innerHTML = `${(fetch.directprebasicText || "").replace(/\n/g, '<br/>')}`;
+      dir2TextElement.innerHTML = `${(fetch.directprebasicAbout || "").replace(/\n/g, '<br/>')}`;
     }
-    const dir3TextElement = document.getElementById("dirText3");
+    const dir3TextElement = document.getElementById("dirText3"); // College Director
     if (dir3TextElement) {
-      dir3TextElement.innerHTML = `${(fetch.directprebasicAbout || "").replace(/\n/g, '<br/>')}`;
+      dir3TextElement.innerHTML = `${(fetch.directcollegeText || "").replace(/\n/g, '<br/>')}`;
     }
 
     // ---------- Mission / Vision (shared with homepage, stored on indexPage) ----------
@@ -185,9 +188,10 @@ fetchFirebaseConfigJson()
     if (copyrightYearEl) copyrightYearEl.textContent = new Date().getFullYear();
 
     // ---------- Director images ----------
-    const image3 = fetch.prebasicphoto;
-    const image1 = fetch.collegephoto;
-    const image2 = fetch.basicphoto;
+    // img1 = School Director (basicphoto), img2 = Director (prebasicphoto), img3 = College Director (collegephoto)
+    const image1 = fetch.basicphoto;
+    const image2 = fetch.prebasicphoto;
+    const image3 = fetch.collegephoto;
 
     const img1 = document.getElementById("img1");
     const img2 = document.getElementById("img2");
@@ -196,22 +200,5 @@ fetchFirebaseConfigJson()
     if (image1) img1.src = image1;
     if (image2) img2.src = image2;
     if (image3) img3.src = image3;
-
-    // ---------- Auto-scroll the director sections ----------
-    const container = document.getElementById('sections-container');
-    if (container) {
-      const clonedContent = container.innerHTML;
-      container.innerHTML += clonedContent;
-
-      const scrollSpeed = 2;
-      function autoScroll() {
-        container.scrollLeft += scrollSpeed;
-        if (container.scrollLeft >= container.scrollWidth / 2) {
-          container.scrollLeft -= container.scrollWidth / 2;
-        }
-        requestAnimationFrame(autoScroll);
-      }
-      autoScroll();
-    }
   })
   .catch(error => console.error('Error fetching Firebase config or page data:', error));
