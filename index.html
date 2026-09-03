@@ -16,6 +16,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="/CSS/style.css">
+    <style>
+        /* style.css's .topbar__contact already handles icon color (gold) and
+           gap between its direct children. This just adds spacing between
+           multiple numbers/emails *within* the same email/phone group. */
+        #email-top-list, #phone-top-list { display: inline-flex; gap: 1em; }
+    </style>
 </head>
 
 <body>
@@ -37,8 +43,8 @@
     <div class="topbar">
         <div class="container topbar__container">
             <div class="topbar__contact">
-                <span><i class="fas fa-envelope"></i> <span id="email-top"></span></span>
-                <span><i class="fas fa-phone"></i>  <span id="phone-top"></span></span>
+                <span id="email-top-list"></span>
+                <span id="phone-top-list"></span>
             </div>
             <div class="topbar__social">
                 <a href="#" id="linkedintop" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
@@ -360,11 +366,18 @@
         </div>
     </div>
 
+    <!-- ============ SCHOOL ADMINISTRATION (4 fixed profiles) ============ -->
+    <section class="section7">
+        <span class="eyebrow eyebrow--center">Leadership</span>
+        <h2>School Administration</h2>
+        <div id="admins-container" class="staff-cards-container"></div>
+    </section>
+
     <!-- ============ STAFF ============ -->
     <section class="section7">
         <span class="eyebrow eyebrow--center">Our People</span>
         <h2>Meet Our Staff</h2>
-        <div class="staff-cards-container"></div>
+        <div id="teachers-container" class="staff-cards-container"></div>
     </section>
 
     <!-- ============ FOOTER CTA ============ -->
@@ -398,8 +411,8 @@
 
                 <div class="footer-col contact-info">
                     <h3>Contact Us</h3>
-                    <p><i class="fas fa-envelope"></i> <span id="email"></span></p>
-                    <p><i class="fas fa-phone"></i> <span id="phone"></span></p>
+                    <div id="email-list"></div>
+                    <div id="phone-list"></div>
                     <div class="social-icons">
                         <a href="#" id="linkedinfooter" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#" id="twitterfooter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>

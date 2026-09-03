@@ -71,7 +71,7 @@ fetchFirebaseConfigJson()
 
     // ---------- School Administration (4 fixed profiles, aboutPage doc) ----------
     const administrators = fetch.administrators || [];
-    const adminsContainer = document.querySelector(".admins-cards-container");
+    const adminsContainer = document.getElementById("admins-container");
     if (adminsContainer) {
       administrators.forEach((admin) => {
         if (!admin || (!admin.adminName && !admin.adminPicture)) return;
@@ -99,7 +99,7 @@ fetchFirebaseConfigJson()
 
     // ---------- Staff ----------
     const teachers = fetch2.teachers;
-    const staffCardsContainer = document.querySelector(".staff-cards-container");
+    const staffCardsContainer = document.getElementById("teachers-container");
 
     Object.keys(teachers).forEach((teacherKey) => {
       const teacher = teachers[teacherKey];
@@ -133,6 +133,49 @@ fetchFirebaseConfigJson()
     subtextElement.innerHTML = `${(fetch.aboutSubtitle || "").replace(/\n/g, '<br/>')}`;
     subtextElement.style.whiteSpace = 'pre-line';
 
+    // Renders a director/admin bio truncated to a consistent length, with a
+    // "Read more" toggle if the full text is longer — keeps all three bio
+    // blocks visually the same height regardless of how much text is in the CMS.
+    const BIO_CHAR_LIMIT = 130;
+    function renderBio(elementId, text) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+
+      const full = (text || "").trim();
+      el.innerHTML = "";
+
+      if (!full) return;
+
+      if (full.length <= BIO_CHAR_LIMIT) {
+        el.innerHTML = full.replace(/\n/g, '<br/>');
+        return;
+      }
+
+      // Truncate on a word boundary so it doesn't cut mid-word.
+      let truncated = full.slice(0, BIO_CHAR_LIMIT);
+      truncated = truncated.slice(0, truncated.lastIndexOf(' ')) || truncated;
+
+      const textSpan = document.createElement('span');
+      textSpan.className = 'bio-text';
+      textSpan.innerHTML = (truncated + '…').replace(/\n/g, '<br/>');
+
+      const toggleBtn = document.createElement('button');
+      toggleBtn.type = 'button';
+      toggleBtn.className = 'read-more-btn';
+      toggleBtn.textContent = 'Read more';
+
+      let expanded = false;
+      toggleBtn.addEventListener('click', () => {
+        expanded = !expanded;
+        textSpan.innerHTML = (expanded ? full : truncated + '…').replace(/\n/g, '<br/>');
+        toggleBtn.textContent = expanded ? 'Read less' : 'Read more';
+      });
+
+      el.appendChild(textSpan);
+      el.appendChild(document.createElement('br'));
+      el.appendChild(toggleBtn);
+    }
+
     // ---------- Director spotlights ----------
     // School Director
     const dir1TitleElement = document.getElementById("dirName1");
@@ -150,18 +193,10 @@ fetchFirebaseConfigJson()
     dir3TitleElement.style.whiteSpace = 'pre-line';
 
     // Director bio text (correct field mapping, confirmed against the CMS form)
-    const dir1TextElement = document.getElementById("dirText1"); // School Director
-    if (dir1TextElement) {
-      dir1TextElement.innerHTML = `${(fetch.directprebasicText || "").replace(/\n/g, '<br/>')}`;
-    }
-    const dir2TextElement = document.getElementById("dirText2"); // Director (Nursery/Primary)
-    if (dir2TextElement) {
-      dir2TextElement.innerHTML = `${(fetch.directprebasicAbout || "").replace(/\n/g, '<br/>')}`;
-    }
-    const dir3TextElement = document.getElementById("dirText3"); // College Director
-    if (dir3TextElement) {
-      dir3TextElement.innerHTML = `${(fetch.directcollegeText || "").replace(/\n/g, '<br/>')}`;
-    }
+    // Truncated to a consistent length with a Read more/less toggle.
+    renderBio("dirText1", fetch.directprebasicText); // School Director
+    renderBio("dirText2", fetch.directprebasicAbout); // Director (Nursery/Primary)
+    renderBio("dirText3", fetch.directcollegeText); // College Director
 
     // ---------- Mission / Vision (shared with homepage, stored on indexPage) ----------
     const vissiontextElement = document.getElementById("visionText");
@@ -173,11 +208,29 @@ fetchFirebaseConfigJson()
     missionTextElement.style.whiteSpace = 'pre-line';
 
     // ---------- Topbar (matches index.html's header exactly) ----------
-    const emailTopElement = document.getElementById("email-top");
-    if (emailTopElement) emailTopElement.textContent = fetch2.emailfooter || "";
+    // Renders one icon per phone/email number, laid out inline so multiple
+    // numbers/emails sit on one row but are still visually separated.
+    function renderContactLinesInline(containerId, text, iconClass) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.innerHTML = "";
+      const lines = (text || "")
+        .split("\n")
+        .map((s) => s.trim())
+        .filter(Boolean);
+      lines.forEach((line) => {
+        const span = document.createElement("span");
+        span.className = "topbar-contact-line";
+        const icon = document.createElement("i");
+        icon.className = iconClass;
+        span.appendChild(icon);
+        span.appendChild(document.createTextNode(" " + line));
+        container.appendChild(span);
+      });
+    }
 
-    const phoneTopElement = document.getElementById("phone-top");
-    if (phoneTopElement) phoneTopElement.textContent = fetch2.phonefooter || "";
+    renderContactLinesInline("email-top-list", fetch2.emailfooter, "fas fa-envelope");
+    renderContactLinesInline("phone-top-list", fetch2.phonefooter, "fas fa-phone");
 
     const topbarLinkIds = {
       facebookfooter: "facebooktop",
@@ -190,16 +243,30 @@ fetchFirebaseConfigJson()
       if (el && fetch2[field]) el.href = fetch2[field];
     });
 
-    // ---------- Footer (same fields/IDs as script.js on the homepage) ----------
-    const emailTextElement = document.getElementById("email");
-    if (emailTextElement) {
-      emailTextElement.innerHTML = `${(fetch2.emailfooter || "").replace(/\n/g, '<br/>')}`;
+    // Renders one <p><i>icon</i> value</p> per line, so multiple phone
+    // numbers or emails each get their own icon instead of sharing a
+    // single icon at the top (which made two numbers look like one run-on line).
+    function renderContactLines(containerId, text, iconClass) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.innerHTML = "";
+      const lines = (text || "")
+        .split("\n")
+        .map((s) => s.trim())
+        .filter(Boolean);
+      lines.forEach((line) => {
+        const p = document.createElement("p");
+        const icon = document.createElement("i");
+        icon.className = iconClass;
+        p.appendChild(icon);
+        p.appendChild(document.createTextNode(" " + line));
+        container.appendChild(p);
+      });
     }
 
-    const phoneTextElement = document.getElementById("phone");
-    if (phoneTextElement) {
-      phoneTextElement.innerHTML = `${(fetch2.phonefooter || "").replace(/\n/g, '<br/>')}`;
-    }
+    // ---------- Footer (same fields/IDs as script.js on the homepage) ----------
+    renderContactLines("email-list", fetch2.emailfooter, "fas fa-envelope");
+    renderContactLines("phone-list", fetch2.phonefooter, "fas fa-phone");
 
     const footerLinkIds = {
       facebookfooter: "facebookfooter",

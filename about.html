@@ -18,8 +18,10 @@
 
     <style>
         /* ---------- About-page-only styles ---------- */
-        /* Namespaced under .about- so nothing here can collide with
-           style.css's existing homepage classes. */
+        /* Everything here either extends style.css's real tokens/classes, or
+           covers layouts (leadership cards) that don't exist there yet.
+           Base h1–h4 (font, color, weight) and p (color) are already set
+           globally by style.css, so they're intentionally not repeated here. */
 
         .about-hero {
             padding: 150px 0 70px;
@@ -28,17 +30,12 @@
             margin: 0 auto;
         }
         .about-hero h1 {
-            font-family: 'Fraunces', serif;
             font-size: clamp(30px, 4.4vw, 46px);
-            font-weight: 500;
-            color: #0e3a2c;
-            line-height: 1.15;
             margin: 0 0 18px;
         }
         .about-hero p {
             font-size: 16.5px;
             line-height: 1.7;
-            color: #544f43;
             margin: 0;
         }
 
@@ -48,25 +45,8 @@
             padding: 80px 24px 30px;
         }
         .leaders-head {
-            text-align: center;
             max-width: 560px;
             margin: 0 auto 64px;
-        }
-        .leaders-head .eyebrow2 {
-            display: inline-block;
-            font-size: 12.5px;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: #d79b2e;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-        .leaders-head h2 {
-            font-family: 'Fraunces', serif;
-            font-weight: 500;
-            font-size: clamp(24px, 3vw, 32px);
-            color: #0e3a2c;
-            margin: 0;
         }
 
         /* School Director / College Director — photo left, label+bio offset upper-right */
@@ -75,14 +55,19 @@
             grid-template-columns: 300px 1fr;
             gap: 36px;
             margin-bottom: 64px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            background: var(--cream-100);
+            padding: 32px;
+            align-items: start;
         }
         .leader-simple .leader-photo {
-            width: 300px;
-            height: 340px;
-            border-radius: 14px;
+            width: 100%;
+            height: 300px;
+            border-radius: var(--radius-md);
             overflow: hidden;
-            background: #f1ead9;
-            border: 1px solid #e4dbc4;
+            background: var(--paper);
+            box-shadow: var(--shadow-lg);
         }
         .leader-simple .leader-photo img {
             width: 100%;
@@ -90,20 +75,20 @@
             object-fit: cover;
         }
         .leader-simple .leader-info {
-            padding-top: 24px;
+            padding-top: 4px;
         }
         .leader-simple .role-label {
             display: block;
-            font-family: 'Fraunces', serif;
+            font-family: var(--font-display);
             font-size: 26px;
-            font-weight: 500;
-            color: #0e3a2c;
+            font-weight: 600;
+            color: var(--green-950);
             margin-bottom: 14px;
         }
         .leader-simple .leader-name {
             font-size: 15px;
-            font-weight: 600;
-            color: #d79b2e;
+            font-weight: 700;
+            color: var(--rust-600);
             margin: 0 0 10px;
             text-transform: uppercase;
             letter-spacing: 0.06em;
@@ -111,33 +96,39 @@
         .leader-simple .leader-bio {
             font-size: 14.5px;
             line-height: 1.7;
-            color: #544f43;
             margin: 0;
             max-width: 420px;
         }
 
-        /* Director — large feature panel with photo nested bottom-right */
+        /* Director — large feature panel with photo nested top-right,
+           same alignment/height as the School Director and College Director photos */
         .leader-feature {
             position: relative;
-            border: 1px solid #e4dbc4;
-            border-radius: 22px;
-            background: #f8f4e8;
-            padding: 44px;
-            min-height: 380px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            background: var(--cream-100);
+            padding: 32px;
             margin-bottom: 64px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 36px;
+            align-items: start;
+        }
+        .leader-feature .leader-info {
+            order: 1;
         }
         .leader-feature .role-label {
             display: block;
-            font-family: 'Fraunces', serif;
+            font-family: var(--font-display);
             font-size: 26px;
-            font-weight: 500;
-            color: #0e3a2c;
+            font-weight: 600;
+            color: var(--green-950);
             margin-bottom: 14px;
         }
         .leader-feature .leader-name {
             font-size: 15px;
-            font-weight: 600;
-            color: #d79b2e;
+            font-weight: 700;
+            color: var(--rust-600);
             margin: 0 0 10px;
             text-transform: uppercase;
             letter-spacing: 0.06em;
@@ -145,19 +136,16 @@
         .leader-feature .leader-bio {
             font-size: 14.5px;
             line-height: 1.7;
-            color: #544f43;
             margin: 0;
-            max-width: 50%;
+            max-width: 420px;
         }
         .leader-feature .leader-photo {
-            position: absolute;
-            right: 44px;
-            bottom: 44px;
-            width: 280px;
+            order: 2;
+            width: 100%;
             height: 300px;
-            border-radius: 14px;
+            border-radius: var(--radius-md);
             overflow: hidden;
-            box-shadow: 0 24px 44px -20px rgba(14, 58, 44, 0.35);
+            box-shadow: var(--shadow-lg);
         }
         .leader-feature .leader-photo img {
             width: 100%;
@@ -165,141 +153,45 @@
             object-fit: cover;
         }
 
+        .read-more-btn {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 0;
+            background: none;
+            border: none;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--rust-600);
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .read-more-btn:hover {
+            color: var(--rust-700);
+        }
+
         @media (max-width: 760px) {
-            .leader-simple {
-                grid-template-columns: 1fr;
-            }
-            .leader-simple .leader-photo {
-                width: 100%;
-                height: 260px;
-            }
+            .leader-simple,
             .leader-feature {
-                padding: 28px;
-                min-height: 0;
+                grid-template-columns: 1fr;
+                padding: 24px;
             }
-            .leader-feature .leader-bio {
-                max-width: 100%;
+            .leader-feature .leader-info {
+                order: 0;
             }
             .leader-feature .leader-photo {
-                position: static;
-                width: 100%;
-                height: 240px;
-                margin-top: 24px;
+                order: 1;
             }
-        }
-
-        /* Administrators — same visual language as the teacher cards below,
-           just a distinct, smaller group shown first. */
-        .admins-section {
-            padding: 20px 24px 50px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        .admins-section h2 {
-            text-align: center;
-            font-family: 'Fraunces', serif;
-            font-weight: 500;
-            font-size: 24px;
-            color: #0e3a2c;
-            margin: 0 0 28px;
-        }
-        .admins-cards-container {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .about-mv {
-            padding: 80px 24px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .about-mv-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-        }
-        .about-mv-card {
-            background: #fff;
-            border: 1px solid #e4dbc4;
-            border-radius: 14px;
-            padding: 32px;
-        }
-        .about-mv-card img {
-            width: 46px;
-            height: 46px;
-            border-radius: 999px;
-            background: #f1ead9;
-            padding: 10px;
-            object-fit: contain;
-            margin-bottom: 14px;
-        }
-        .about-mv-card h3 {
-            font-family: 'Fraunces', serif;
-            font-size: 20px;
-            font-weight: 500;
-            margin: 0 0 10px;
-            color: #0e3a2c;
-        }
-        .about-mv-card p {
-            font-size: 15px;
-            line-height: 1.7;
-            color: #544f43;
-            margin: 0;
-        }
-
-        .about-staff {
-            background: #f1ead9;
-            padding: 70px 24px;
-        }
-        .about-staff h2 {
-            text-align: center;
-            font-family: 'Fraunces', serif;
-            font-weight: 500;
-            font-size: 28px;
-            color: #0e3a2c;
-            margin: 0 0 32px;
-        }
-        .staff-cards-container {
-            display: flex;
-            gap: 16px;
-            overflow-x: hidden;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding-bottom: 6px;
-        }
-        .staff-card {
-            flex: 0 0 190px;
-            background: #fff;
-            border-radius: 14px;
-            padding: 20px 16px;
-            text-align: center;
-            box-shadow: 0 10px 24px -14px rgba(14,58,44,0.25);
-        }
-        .staff-card img {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto 12px;
-        }
-        .staff-card h3 {
-            font-size: 14px;
-            font-weight: 600;
-            margin: 0 0 4px;
-            color: #1c1a16;
-        }
-        .staff-card p {
-            font-size: 12.5px;
-            color: #544f43;
-            margin: 0;
-        }
-
-        @media (max-width: 720px) {
+            .leader-simple .leader-photo,
+            .leader-feature .leader-photo {
+                height: 240px;
+            }
             .about-hero { padding: 120px 20px 50px; }
-            .about-mv-grid { grid-template-columns: 1fr; }
         }
+
+        /* style.css's .topbar__contact already handles icon color (gold) and
+           gap between its direct children. This just adds spacing between
+           multiple numbers/emails *within* the same email/phone group. */
+        #email-top-list, #phone-top-list { display: inline-flex; gap: 1em; }
     </style>
 </head>
 
@@ -313,8 +205,8 @@
     <div class="topbar">
         <div class="container topbar__container">
             <div class="topbar__contact">
-                <span><i class="fas fa-envelope"></i> <span id="email-top"></span></span>
-                <span><i class="fas fa-phone"></i> <span id="phone-top"></span></span>
+                <span id="email-top-list"></span>
+                <span id="phone-top-list"></span>
             </div>
             <div class="topbar__social">
                 <a href="#" id="linkedintop" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
@@ -413,8 +305,8 @@
     <!-- ============ LEADERSHIP ============ -->
     <section class="leaders">
         <div class="leaders-head">
-            <span class="eyebrow2">Meet the leadership</span>
-            <h2>The people guiding CrestHive</h2>
+            <span class="eyebrow eyebrow--center">Meet the leadership</span>
+            <h2 class="section-title section-title--center">The people guiding CrestHive</h2>
         </div>
 
         <div class="leader-simple">
@@ -429,9 +321,11 @@
         </div>
 
         <div class="leader-feature">
-            <span class="role-label">Director</span>
-            <p class="leader-name" id="dirName2"></p>
-            <p class="leader-bio" id="dirText2"></p>
+            <div class="leader-info">
+                <span class="role-label">Director</span>
+                <p class="leader-name" id="dirName2"></p>
+                <p class="leader-bio" id="dirText2"></p>
+            </div>
             <div class="leader-photo">
                 <img id="img2" src="/assets/logo.png" alt="Director">
             </div>
@@ -450,31 +344,45 @@
     </section>
 
     <!-- ============ SCHOOL ADMINISTRATION (4 fixed profiles, same visual language as staff cards) ============ -->
-    <section class="admins-section">
+    <section class="section7">
+        <span class="eyebrow eyebrow--center">Leadership</span>
         <h2>School Administration</h2>
-        <div class="admins-cards-container"></div>
+        <div id="admins-container" class="staff-cards-container"></div>
     </section>
 
-    <!-- ============ MISSION / VISION ============ -->
-    <section class="about-mv">
-        <div class="about-mv-grid">
-            <div class="about-mv-card">
-                <img src="assets/target.png" alt="">
-                <h3>Mission</h3>
-                <p id="missionText"></p>
+    <!-- ============ MISSION / VISION (identical to index.html) ============ -->
+    <section class="section4">
+        <span class="eyebrow eyebrow--center">Our Compass</span>
+        <h2 class="section-title section-title--center">Mission &amp; Vision</h2>
+
+        <div id="slidor" class="slidor">
+            <div class="vm vm--mission">
+                <i class="fas fa-compass vm__icon"></i>
+                <h3>Our Mission</h3>
+                <div class="tsc">
+                    <span class="quote-mark">&ldquo;</span>
+                    <div id="missionText" class="supporting-text2"></div>
+                    <span class="quote-mark quote-mark--close">&rdquo;</span>
+                </div>
             </div>
-            <div class="about-mv-card">
-                <img src="assets/aim.png" alt="">
-                <h3>Vision</h3>
-                <p id="visionText"></p>
+
+            <div class="vm vm--vision">
+                <i class="fas fa-eye vm__icon"></i>
+                <h3>Our Vision</h3>
+                <div class="tsc">
+                    <span class="quote-mark">&ldquo;</span>
+                    <div id="visionText" class="supporting-text2"></div>
+                    <span class="quote-mark quote-mark--close">&rdquo;</span>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- ============ STAFF ============ -->
-    <section class="about-staff">
-        <h2>Meet Our Teachers</h2>
-        <div class="staff-cards-container"></div>
+    <section class="section7">
+        <span class="eyebrow eyebrow--center">Our People</span>
+        <h2>Meet Our Staff</h2>
+        <div id="teachers-container" class="staff-cards-container"></div>
     </section>
 
     <!-- ============ FOOTER (identical to index.html) ============ -->
@@ -508,8 +416,8 @@
 
                 <div class="footer-col contact-info">
                     <h3>Contact Us</h3>
-                    <p><i class="fas fa-envelope"></i> <span id="email"></span></p>
-                    <p><i class="fas fa-phone"></i> <span id="phone"></span></p>
+                    <div id="email-list"></div>
+                    <div id="phone-list"></div>
                     <div class="social-icons">
                         <a href="#" id="linkedinfooter" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#" id="twitterfooter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
