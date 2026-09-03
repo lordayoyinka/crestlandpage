@@ -192,6 +192,19 @@
            gap between its direct children. This just adds spacing between
            multiple numbers/emails *within* the same email/phone group. */
         #email-top-list, #phone-top-list { display: inline-flex; gap: 1em; }
+
+        /* Admin cards: hexagon photo frame (distinct from the circular staff
+           photos) and centered layout, since there are only ever 4 of them.
+           Scoped to #admins-container so #teachers-container is untouched. */
+        #admins-container {
+            justify-content: center;
+            flex-wrap: wrap;
+            overflow-x: visible;
+        }
+        #admins-container .staff-card img {
+            border-radius: 0;
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+        }
     </style>
 </head>
 
