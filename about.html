@@ -201,7 +201,15 @@
             flex-wrap: wrap;
             overflow-x: visible;
         }
+        #admins-container .staff-card {
+            /* Slightly wider card to comfortably fit the larger photo below */
+            flex: 0 0 190px;
+            width: 190px;
+        }
         #admins-container .staff-card img {
+            /* A little bigger than the homepage's admin photos (120px), on request */
+            width: 145px;
+            height: 145px;
             border-radius: 0;
             clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
         }
