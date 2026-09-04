@@ -122,12 +122,52 @@ fetchFirebaseConfigJson()
       abtpretextElement.style.whiteSpace = 'pre-line';
     }
 
-    // ---------- School Director (same identity as About page's School Director) ----------
-    const dir3textElement = document.getElementById("dirText");
-    if (dir3textElement) {
-      dir3textElement.innerHTML = `${(fetch.directprebasicText || "").replace(/\n/g, '<br/>')}`;
-      dir3textElement.style.whiteSpace = 'pre-line';
+    // Renders a bio truncated to a fixed length, with a "Read more" toggle
+    // if the full text is longer — same pattern used for the director bios
+    // on the About page, just a longer limit here since this page only
+    // shows one profile (more room to give it).
+    const BIO_CHAR_LIMIT = 500;
+    function renderBio(elementId, text) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+
+      const full = (text || "").trim();
+      el.innerHTML = "";
+
+      if (!full) return;
+
+      if (full.length <= BIO_CHAR_LIMIT) {
+        el.innerHTML = full.replace(/\n/g, '<br/>');
+        return;
+      }
+
+      // Truncate on a word boundary so it doesn't cut mid-word.
+      let truncated = full.slice(0, BIO_CHAR_LIMIT);
+      truncated = truncated.slice(0, truncated.lastIndexOf(' ')) || truncated;
+
+      const textSpan = document.createElement('span');
+      textSpan.className = 'bio-text';
+      textSpan.innerHTML = (truncated + '…').replace(/\n/g, '<br/>');
+
+      const toggleBtn = document.createElement('button');
+      toggleBtn.type = 'button';
+      toggleBtn.className = 'read-more-btn';
+      toggleBtn.textContent = 'Read more';
+
+      let expanded = false;
+      toggleBtn.addEventListener('click', () => {
+        expanded = !expanded;
+        textSpan.innerHTML = (expanded ? full : truncated + '…').replace(/\n/g, '<br/>');
+        toggleBtn.textContent = expanded ? 'Read less' : 'Read more';
+      });
+
+      el.appendChild(textSpan);
+      el.appendChild(document.createElement('br'));
+      el.appendChild(toggleBtn);
     }
+
+    // ---------- School Director (same identity as About page's School Director) ----------
+    renderBio("dirText", fetch.directprebasicText);
 
     const dir3TitleElement = document.getElementById("dirName");
     if (dir3TitleElement) {
