@@ -4,224 +4,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CrestHive Basic School</title>
-    <link rel="stylesheet" href="/CSS/BASICSCHOLL.css">
+    <title>Crest Nursery and Primary School — In Detail | CrestHive</title>
+    <meta name="description" content="A closer look at life and learning at Crest Nursery and Primary School.">
+    <link rel="icon" href="./favicon.ico" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="/CSS/style.css">
+
+    <style>
+        /* ---------- Basicschool-page-only styles ---------- */
+        .bs-hero {
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        .bs-hero video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        .bs-hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(11,38,17,.55), rgba(11,38,17,.8));
+            z-index: 1;
+        }
+        .bs-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            padding: 24px;
+            color: #fff;
+        }
+        .bs-hero-content h1 {
+            color: #fff;
+            font-size: clamp(28px, 4.4vw, 44px);
+            margin: 0 0 14px;
+        }
+        .bs-hero-content p {
+            color: rgba(255,255,255,.9);
+            font-size: 16px;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .bs-body {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+        .bs-body > p {
+            font-size: 16px;
+            line-height: 1.75;
+            margin-bottom: 40px;
+        }
+        .bs-panel {
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            background: var(--cream-100);
+            padding: 40px;
+        }
+        .bs-panel h2 { font-size: 22px; margin: 0 0 18px; }
+        .bs-panel ul { list-style: none; margin: 0; padding: 0; }
+        .bs-panel li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--line);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .bs-panel li:last-child { border-bottom: none; }
+        .bs-panel li::before {
+            content: "+";
+            font-weight: 700;
+            color: var(--rust-600);
+            flex-shrink: 0;
+        }
+
+        .bs-cta {
+            text-align: center;
+            border-radius: var(--radius-lg);
+            background: linear-gradient(145deg, var(--green-950), var(--green-700));
+            padding: 56px 32px;
+            color: #fff;
+            margin-top: 40px;
+        }
+        .bs-cta h2 { color: #fff; margin: 0 0 12px; }
+        .bs-cta p { color: rgba(255,255,255,.85); margin: 0 0 26px; }
+
+        #email-top-list, #phone-top-list { display: inline-flex; gap: 1em; }
+    </style>
 </head>
 
 <body>
-    
 
-    <script type="module"
-    src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
-<script type="module"
-    src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js"></script>
+    <script type="module" src="./jsfiles/site-chrome.js"></script>
 
-<!-- Your main script file with type="module" -->
-<script type="module" src="./jsfiles/basicschool.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js"></script>
+    <script type="module" src="./jsfiles/basicschool.js"></script>
 
-<!-- Firebase configuration and initialization -->
-<script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js';
-import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js';
+    <site-header></site-header>
 
-// Your Firebase configuration and initialization code can go here
-
-
-</script>
-
-
-
-
-
-
-
-
-<div class="snowfall"></div>
-
-
-
-
-
-
-<button class="nav-toggle" id="nav-toggle">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-
-  <!-- Your navigation menu goes here -->
-  <nav class="nav-menu">
-    <nav class="navi">
-        <div class="container nav__container">
-            <a href="index.html" class="school-name">
-                <h4>Crest<span style="color: rgba(255, 187, 0, 1);">Hive</span></h4>
-            </a>
-            <ul class="nav__menu">
-                <li class="school-dropdown">
-                    <a href="#school">School <i class="fas fa-caret-down"></i></a>
-                    <ul class="school-submenu">
-<li><a href="pre-basic.html"> Crest Nursery and Primary School</a></li>
-                                                <li><a href="college-extra.html">Cresthive International Schoolve international school</a></li>
-                    </ul>
-                </li>
-                <li class="school-dropdown">
-                    <a href="#school">Admission <i class="fas fa-caret-down"></i></a>
-                    <ul class="school-submenu">
-                        <li><a href="admission-process.html">Admission process</a></li>
-                        <li><a href="entrance-test.html">Entrance tests</a></li>
-                        <li><a href="holidays.html">Holidays</a></li>
-
-                    </ul>
-                </li>                <li><a href="about.html">About Us</a></li>
-            </ul>
-
-              <a href="/login.html">
-                <button class="navbtn2">Log In</button>
-            </a>
-
-            <a href="https://student.crestscholars.com/RegistrationPage">
-                <button class="navbtn">Start Registration</button>
-            </a>
-        </div>
-    </nav>
-  </nav>
-
-
-
-
-
-     <nav class="navbar">
-        <div class="container nav__container">
-            <a href="index.html" class="school-name" style="display: flex; align-items: center;">
-                <img src="assets/logo.png" style="width: 36px; height: 36px; border-radius: 999px; margin-right: 6px;" />
-                <h4>Crest<span style="color: rgba(255, 187, 0, 1);">Hive</span></h4>
-            </a>
-            <ul class="nav__menu">
-                <li class="school-dropdown">
-                    <a href="#school">School <i class="fas fa-caret-down"></i></a>
-                    <ul class="school-submenu">
-<li><a href="pre-basic.html"> Crest Nursery and Primary School</a></li>
-                                                <li><a href="college-extra.html">Cresthive International School</a></li>
-                    </ul>
-                </li>
-                <li class="school-dropdown">
-                    <a href="#school">Admission <i class="fas fa-caret-down"></i></a>
-                    <ul class="school-submenu">
-                        <li><a href="admission-process.html">Admission process</a></li>
-                        <li><a href="entrance-test.html">Entrance tests</a></li>
-                        <li><a href="holidays.html">Holidays</a></li>
-
-                    </ul>
-                </li>                <li><a href="about.html">About Us</a></li>
-            </ul>
-            <a href="https://student.crestscholars.com/RegistrationPage">
-            <button class="navbtn">Start Registration</button>
-            </a>
-        </div>
-    </nav>
-
-
-    <section class="hero">
-        <div class="hero-content">
-            <video autoplay loop muted>
-                <source src="/assets/galvideo.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+    <!-- ============ HERO (video, dynamic title/subtitle from the CMS) ============ -->
+    <section class="bs-hero">
+        <video autoplay loop muted playsinline>
+            <source src="/assets/galvideo.mp4" type="video/mp4">
+        </video>
+        <div class="bs-hero-content">
+            <h1 id="herotitle">Crest Nursery and Primary School</h1>
+            <p id="herosub"></p>
         </div>
     </section>
 
+    <!-- ============ DETAILS + NOTABLES ============ -->
+    <section class="bs-body">
+        <p id="detailsText"></p>
 
-    <section class="section1">
-        <div class="container">
-            <h1 id="herotitle"> 
+        <div class="bs-panel">
+            <h2>Know More</h2>
+            <ul id="activities-container"></ul>
+        </div>
 
-            </h1>
-            
-            <p id="herosub">
-               
-            </p>
-           
+        <div class="bs-cta">
+            <h2>Join us for an exciting educational journey!</h2>
+            <p>Start the admission process for your child today.</p>
+            <a href="admission-process.html"><button class="btn btn--gold">Get Started</button></a>
         </div>
     </section>
 
-    <section class="tablet">
-        <nav class="category-navigation">
-            <ul>
-                <li><a href="#" data-category="activities"><i class="fas fa-globe"></i> More Details</a></li>
-               
-            </ul>
-        </nav>
+    <!-- ============ FOOTER (rendered by site-chrome.js) ============ -->
+    <site-footer></site-footer>
 
-        <div class="tablet1">
-            <div class="category-content" data-category="activities">
-                <p id="detailsText">
-                  
-                </p>
-                
-                <h2>
-                    Know More: </h2>
-                <div id="activities-container"
-                class="activitylist">
-                    <ul class="activity-list">
-                        
-                    </ul>
-                </div>
-            </div>
-
-            
-
-
-
-
-
-
-    </section>
-
-
-    <section class="cta-section">
-        <h2 class="cta-sentence">Join us for an exciting educational journey!</h2>
-        <a href="https://student.crestscholars.com/RegistrationPage" class="cta-button">Get Started</a>
-    </section>
-
-
-
-    <footer class="footer">
-        <div class="footer-content">
-            <h2 class="footer-header">
-                <span class="fasthand-font">CrestHive</span> surpasses just a
-            </h2>
-            <h2 class="footer-header footer-header-fasthand">school, we are family.</h2>
-            <p class="footer-text">We imbibe knowledge without compromising</p>
-            <p class="footer-text"></p>
-            <a href="/about.html">
-            <button class="footer-button">Learn More</button>
-            </a>
-        </div>
-
-        <div class="footer-content2">
-            <div class="footer-content2">
-                <div class="contact-info">
-                    <h2>Contact Us</h2>
-                    <hr>
-                    <p><i class="fas fa-envelope"></i> Email: info@cresthive.com</p>
-                    <hr>
-                    <p><i class="fas fa-phone"></i> Phone number: 07030175401</p>
-                </div>
-                <div class="copyright">
-                    <p>&#169; 2023, All rights reserved</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fas fa-envelope"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </footer>
-
-
-    <script src="school.js"></script>
+    <script src="jsfiles/footer.js" defer></script>
+    <script src="jsfiles/enhance.js" defer></script>
 </body>
 
 </html>
